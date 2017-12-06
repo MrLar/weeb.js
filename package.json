@@ -1,0 +1,23 @@
+{
+  "name": "weeb.js",
+  "version": "1.0.0",
+  "description": "A wrapper for https://weeb.sh/",
+  "main": "index.js",
+  "directories": {
+    "example": "example",
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrLar/weeb.js.git"
+  },
+  "author": "Lars K. (https://github.com/MrLar)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MrLar/weeb.js/issues"
+  },
+  "homepage": "https://github.com/MrLar/weeb.js#readme"
+}
