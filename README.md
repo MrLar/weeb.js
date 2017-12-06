@@ -2,7 +2,7 @@
 
 A wrapper for https://weeb.sh/
 
-# Offcial Documentation
+# Official Documentation
 https://docs.weeb.sh/#
 
 # Get Random Images
