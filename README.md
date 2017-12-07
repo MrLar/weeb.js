@@ -1,6 +1,8 @@
+<a href="https://nodei.co/npm/weeb.js/"><img src="https://nodei.co/npm/weeb.js.png?downloads=true&stars=true" alt="NPM info" /></a>
+
 A wrapper for https://weeb.sh/
 
-# Offcial Documentation
+# Official Documentation
 https://docs.weeb.sh/#
 
 # Get Random Images
