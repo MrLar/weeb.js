@@ -1,4 +1,4 @@
-let weeb = require("../")
+const weeb = require("../")
 
 const sh = new weeb("super secret token")
 
