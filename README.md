@@ -45,8 +45,8 @@ sh.getTags().then(array => {
 ```js
 const weeb = require("weeb.js")
 const sh = new weeb("super secret token") //Reuqires you to have the Simple Image Gen Scope
-//Type can be wan, awooo or eyes (Awooo supports hair and face as options which needs to be a hex code)
-sh.generateImage("wan").then(buffer => { 
+
+sh.generateImage("won").then(buffer => { //Type can be won, awooo or eyes (Awooo supports hair and face as options which needs to be a hex code)
     console.log(buffer)
 });
 ```
