@@ -1,5 +1,5 @@
 const weeb = require("../")
-const sh = new weeb("super secret token") //Reuqires you to have the Licemse Scope
+const sh = new weeb("super secret token") //Reuqires you to have the License Scope
 const options = {
     title: "test", 
     avatar: "https://cdn.discordapp.com/avatars/132584525296435200/a9f823c7a39a53f562fe8dcb6edf4607.webp", 
