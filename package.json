@@ -1,6 +1,6 @@
 {
   "name": "weeb.js",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A wrapper for https://weeb.sh/",
   "main": "index.js",
   "directories": {
@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/MrLar/weeb.js/issues"
   },
-  "homepage": "https://github.com/MrLar/weeb.js#readme"
+  "homepage": "https://github.com/MrLar/weeb.js#readme",
+  "dependencies": {
+    "request": "^2.83.0"
+  }
 }

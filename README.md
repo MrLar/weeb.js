@@ -40,3 +40,29 @@ sh.getTags().then(array => {
     console.log(array)
 });
 ```
+# Generate an Image (Requires Simple Image Gen Scope)
+
+```js
+const weeb = require("weeb.js")
+const sh = new weeb("super secret token") //Reuqires you to have the Simple Image Gen Scope
+
+sh.generateImage("wan").then(buffer => { //Type can be wan, awooo or eyes (Awooo supports hair and face as options which needs to be a hex code)
+    console.log(buffer)
+});
+```
+
+# Generate a License (Requires License Scope)
+
+```js
+const weeb = require("weeb.js")
+const sh = new weeb("super secret token") //Reuqires you to have the Licemse Scope
+const options = {
+    title: "test", 
+    avatar: "https://cdn.discordapp.com/avatars/132584525296435200/a9f823c7a39a53f562fe8dcb6edf4607.webp", 
+    badges: ["https://cdn.discordapp.com/avatars/267207628965281792/e13af85a8abbd8fd2a5ec76d3ca2fbd6.webp"], 
+    widgets: ["Hi", "bye", "kek"]
+}
+sh.generateLicense(options).then(buffer => {
+    console.log(buffer)
+});
+```
