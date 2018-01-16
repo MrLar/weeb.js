@@ -3,8 +3,8 @@
 A wrapper for https://weeb.sh/
 
 # Official Documentation
-Bsee: https://docs.weeb.sh/#<br>
-Image Gen: https://gist.github.com/DasWolke/3b1f884ac7779faab7e1026feed78b6c
+[Base Documentation](https://docs.weeb.sh/#)<br>
+[Image Generation Documentation](https://gist.github.com/DasWolke/3b1f884ac7779faab7e1026feed78b6c)
 
 # Get Random Images
 ### Version 1.3.0 Contains a semi-breaking change in random images
