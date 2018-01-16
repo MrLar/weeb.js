@@ -51,7 +51,8 @@ const weeb = require("weeb.js")
 const sh = new weeb("super secret token", "somefunkyname/someweirdversion")
                                             //User Agent (Optional) 
 //Reuqires you to have the Simple Image Gen Scope
-sh.generateImage("won").then(buffer => { //Type can be won, awooo or eyes (Awooo supports hair and face as options which needs to be a hex code)
+//Type can be won, awooo or eyes (Awooo supports hair and face as options which needs to be a hex code)
+sh.generateImage("won").then(buffer => {
     console.log(buffer)
 });
 ```
