@@ -3,7 +3,7 @@
 A wrapper for https://weeb.sh/
 
 # Official Documentation
-Bsee: https://docs.weeb.sh/#
+Bsee: https://docs.weeb.sh/#<br>
 Image Gen: https://gist.github.com/DasWolke/3b1f884ac7779faab7e1026feed78b6c
 
 # Get Random Images
