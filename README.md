@@ -1,7 +1,7 @@
 <a href="https://nodei.co/npm/weeb.js/"><img src="https://nodei.co/npm/weeb.js.png?downloads=true&stars=true" alt="NPM info" /></a>
 
 A wrapper for https://weeb.sh/<br>
-Replace all instances of "super secret token" with your actual token if you are using WolkeTokens place is as `Wolke <token>` and if a BearerToken place it as `Brearer <token>` everything else will throw an error.
+Replace all instances of "super secret token" with your actual token if you are using a WolkeToken place is as `Wolke <token>` and if a BearerToken place it as `Brearer <token>` everything else will throw an error.
 # Official Documentation
 [Base Documentation](https://docs.weeb.sh/#)<br>
 [Image Generation Documentation](https://gist.github.com/DasWolke/3b1f884ac7779faab7e1026feed78b6c)
