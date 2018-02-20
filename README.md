@@ -1,7 +1,7 @@
 <a href="https://nodei.co/npm/weeb.js/"><img src="https://nodei.co/npm/weeb.js.png?downloads=true&stars=true" alt="NPM info" /></a>
 
-A wrapper for https://weeb.sh/
-
+A wrapper for https://weeb.sh/<br>
+Replace all instances of "super secret token" with your actual token if you are using a WolkeToken place it as `Wolke <token>` and if a BearerToken place it as `Brearer <token>` everything else will throw an error.
 # Official Documentation
 [Base Documentation](https://docs.weeb.sh/#)<br>
 [Image Generation Documentation](https://gist.github.com/DasWolke/3b1f884ac7779faab7e1026feed78b6c)
@@ -51,7 +51,7 @@ sh.getTags().then(array => {
 const weeb = require("weeb.js")
 const sh = new weeb("super secret token", "somefunkyname/someweirdversion")
                                             //User Agent (Optional) 
-//Reuqires you to have the Simple Image Gen Scope
+//Requires you to have the Simple Image Gen Scope
 //Type can be won, awooo or eyes (Awooo supports hair and face as options which needs to be a hex code)
 sh.generateImage("won").then(buffer => {
     console.log(buffer)
@@ -71,7 +71,7 @@ const options = {
     widgets: ["Hi", "bye", "kek"]
 }
 
- //Reuqires you to have the License Scope
+ //Requires you to have the License Scope
 sh.generateLicense(options).then(buffer => {
     console.log(buffer)
 });
@@ -84,7 +84,7 @@ const weeb = require("weeb.js")
 const sh = new weeb("super secret token", "somefunkyname/someweirdversion")
                                             //User Agent (Optional)  
 const url = "https://cdn.discordapp.com/avatars/132584525296435200/3a0631c5d4df2a5e8795547964bd1027.webp"
-//Reuqires you to have the Waifu Image Gen Scope
+//Requires you to have the Waifu Image Gen Scope
 sh.generateInsult(url).then(buffer => {
     console.log(buffer)
 });
