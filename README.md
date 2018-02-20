@@ -14,7 +14,7 @@ This wrapper now returns an array containing the URL, ID and Filetype (in this o
 ```js
 const weeb = require("weeb.js")
 
-const sh = new weeb("super secret token", "somefunkyname/someweirdversion")
+const sh = new weeb("super secret token", "Weeb.js Example/v1.3.2")
                                             //User Agent (Optional)
 
 sh.getRandom({type: "bite", nsfw: false, filetype: "gif"}).then(array => {
@@ -29,7 +29,7 @@ sh.getRandom({type: "bite", nsfw: false, filetype: "gif"}).then(array => {
 ```js
 const weeb = require("weeb.js")
 
-const sh = new weeb("super secret token", "somefunkyname/someweirdversion")
+const sh = new weeb("super secret token", "Weeb.js Example/v1.3.2")
                                             //User Agent (Optional)
 sh.getTypes().then(array => {
     console.log(array)
@@ -41,7 +41,7 @@ sh.getTypes().then(array => {
 ```js
 const weeb = require("weeb.js")
 
-const sh = new weeb("super secret token", "somefunkyname/someweirdversion")
+const sh = new weeb("super secret token", "Weeb.js Example/v1.3.2")
                                             //User Agent (Optional)
 sh.getTags().then(array => {
     console.log(array)
@@ -51,7 +51,7 @@ sh.getTags().then(array => {
 
 ```js
 const weeb = require("weeb.js")
-const sh = new weeb("super secret token", "somefunkyname/someweirdversion")
+const sh = new weeb("super secret token", "Weeb.js Example/v1.3.2")
                                             //User Agent (Optional) 
 //Requires you to have the Simple Image Gen Scope
 //Type can be won, awooo or eyes (Awooo supports hair and face as options which needs to be a hex code)
@@ -64,7 +64,7 @@ sh.generateImage("won").then(buffer => {
 
 ```js
 const weeb = require("weeb.js")
-const sh = new weeb("super secret token", "somefunkyname/someweirdversion")
+const sh = new weeb("super secret token", "Weeb.js Example/v1.3.2")
                                             //User Agent (Optional) 
 const options = {
     title: "test", 
@@ -83,7 +83,7 @@ sh.generateLicense(options).then(buffer => {
 
 ```js
 const weeb = require("weeb.js")
-const sh = new weeb("super secret token", "somefunkyname/someweirdversion")
+const sh = new weeb("super secret token", "Weeb.js Example/v1.3.2")
                                             //User Agent (Optional)  
 const url = "https://cdn.discordapp.com/avatars/132584525296435200/3a0631c5d4df2a5e8795547964bd1027.webp"
 //Requires you to have the Waifu Image Gen Scope
