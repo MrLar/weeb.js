@@ -1,7 +1,9 @@
 <a href="https://nodei.co/npm/weeb.js/"><img src="https://nodei.co/npm/weeb.js.png?downloads=true&stars=true" alt="NPM info" /></a>
 
 A wrapper for https://weeb.sh/<br>
-Replace all instances of "super secret token" with your actual token if you are using a WolkeToken place it as `Wolke <token>` and if a BearerToken place it as `Brearer <token>` everything else will throw an error.
+Replace all instances of "super secret token" with your actual token if you are using a WolkeToken place it as `Wolke <token>` and if a BearerToken place it as `Brearer <token>` everything else will throw an error.<br><br>
+##### Note:
+If you have never spoken with a Weeb.sh Developer and they told you, you have access to an Image-generation then you **cannot** use any of the Generation methods (they will error with missing Scope). If you have access to one that does not mean you have access to all. The scopes needed are in the comments and brackets on the example.
 # Official Documentation
 [Base Documentation](https://docs.weeb.sh/#)<br>
 [Image Generation Documentation](https://gist.github.com/DasWolke/3b1f884ac7779faab7e1026feed78b6c)
