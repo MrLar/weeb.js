@@ -1,6 +1,6 @@
 {
   "name": "weeb.js",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "A wrapper for https://weeb.sh/",
   "main": "index.js",
   "directories": {

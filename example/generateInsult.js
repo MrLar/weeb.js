@@ -1,8 +1,7 @@
 const weeb = require("../");
 
 const sh = new weeb("super secret token", "Weeb.js Example/v1.4.0");
-
-//User Agent (Optional)
+                                            //User Agent (Optional)
 const options = {
     title: "test",
     avatar: "https://cdn.discordapp.com/avatars/132584525296435200/a9f823c7a39a53f562fe8dcb6edf4607.webp",
