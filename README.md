@@ -9,12 +9,10 @@ If you have never spoken with a Weeb.sh Developer and they told you, you have ac
 [Image Generation Documentation](https://gist.github.com/DasWolke/3b1f884ac7779faab7e1026feed78b6c)
 
 # Get Random Images
-### Version 1.3.0 Contains a semi-breaking change in random images
-This wrapper now returns an array containing the URL, ID and Filetype (in this order) instead of only the url!
 ```js
-const weeb = require("weeb.js")
+const weeb = require("weeb.js");
 
-const sh = new weeb("super secret token", "Weeb.js Example/v1.3.2")
+const sh = new weeb("super secret token", "Weeb.js Example/v1.4.0");
                                             //User Agent (Optional)
 
 sh.getRandom({type: "bite", nsfw: false, filetype: "gif"}).then(array => {
@@ -27,9 +25,9 @@ sh.getRandom({type: "bite", nsfw: false, filetype: "gif"}).then(array => {
 # Get all available Types
 
 ```js
-const weeb = require("weeb.js")
+const weeb = require("weeb.js");
 
-const sh = new weeb("super secret token", "Weeb.js Example/v1.3.2")
+const sh = new weeb("super secret token", "Weeb.js Example/v1.4.0");
                                             //User Agent (Optional)
 sh.getTypes().then(array => {
     console.log(array)
@@ -39,9 +37,9 @@ sh.getTypes().then(array => {
 # Get all available Tags
 
 ```js
-const weeb = require("weeb.js")
+const weeb = require("weeb.js");
 
-const sh = new weeb("super secret token", "Weeb.js Example/v1.3.2")
+const sh = new weeb("super secret token", "Weeb.js Example/v1.4.0");
                                             //User Agent (Optional)
 sh.getTags().then(array => {
     console.log(array)
@@ -50,30 +48,50 @@ sh.getTags().then(array => {
 # Generate an Image (Requires Simple Image Gen Scope)
 
 ```js
-const weeb = require("weeb.js")
-const sh = new weeb("super secret token", "Weeb.js Example/v1.3.2")
-                                            //User Agent (Optional) 
+const weeb = require("weeb.js");
+
+const sh = new weeb("super secret token", "Weeb.js Example/v1.4.0");
+//User Agent (Optional)
 //Requires you to have the Simple Image Gen Scope
 //Type can be won, awooo or eyes (Awooo supports hair and face as options which needs to be a hex code)
+
 sh.generateImage("won").then(buffer => {
     console.log(buffer)
 });
 ```
 
+# Generate a Discord Status Mock (Requires Simple Image Gen Scope)
+
+```js
+const weeb = require("weeb.js");
+
+const sh = new weeb("super secret token", "Weeb.js Example/v1.4.0");
+//User Agent (Optional)
+//Requires you to have the Simple Image Gen Scope
+//Status (first argument) can be "online", "dnd", "idle", "offline" or "streaming"
+
+sh.generateDiscordMock("online", "https://cdn.discordapp.com/avatars/132584525296435200/8c7423df35ef1258db65451a011d63ca.png").then(buffer => {
+    console.log(buffer)
+});
+
+```
+
 # Generate a License (Requires License Scope)
 
 ```js
-const weeb = require("weeb.js")
-const sh = new weeb("super secret token", "Weeb.js Example/v1.3.2")
-                                            //User Agent (Optional) 
-const options = {
-    title: "test", 
-    avatar: "https://cdn.discordapp.com/avatars/132584525296435200/a9f823c7a39a53f562fe8dcb6edf4607.webp", 
-    badges: ["https://cdn.discordapp.com/avatars/267207628965281792/e13af85a8abbd8fd2a5ec76d3ca2fbd6.webp"], 
-    widgets: ["Hi", "bye", "kek"]
-}
+const weeb = require("weeb.js");
 
- //Requires you to have the License Scope
+const sh = new weeb("super secret token", "Weeb.js Example/v1.4.0");
+
+//User Agent (Optional)
+const options = {
+    title: "test",
+    avatar: "https://cdn.discordapp.com/avatars/132584525296435200/a9f823c7a39a53f562fe8dcb6edf4607.webp",
+    badges: ["https://cdn.discordapp.com/avatars/267207628965281792/e13af85a8abbd8fd2a5ec76d3ca2fbd6.webp"],
+    widgets: ["Hi", "bye", "kek"]
+};
+
+//Requires you to have the License Scope
 sh.generateLicense(options).then(buffer => {
     console.log(buffer)
 });
@@ -82,10 +100,11 @@ sh.generateLicense(options).then(buffer => {
 # Generate a Waifu Insult Image (Requires Waifu Image Gen Scope)
 
 ```js
-const weeb = require("weeb.js")
-const sh = new weeb("super secret token", "Weeb.js Example/v1.3.2")
-                                            //User Agent (Optional)  
-const url = "https://cdn.discordapp.com/avatars/132584525296435200/3a0631c5d4df2a5e8795547964bd1027.webp"
+const weeb = require("weeb.js");
+const sh = new weeb("super secret token", "Weeb.js Example/v1.4.0");
+//User Agent (Optional)
+
+const url = "https://cdn.discordapp.com/avatars/132584525296435200/3a0631c5d4df2a5e8795547964bd1027.webp";
 //Requires you to have the Waifu Image Gen Scope
 sh.generateInsult(url).then(buffer => {
     console.log(buffer)
