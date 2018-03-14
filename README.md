@@ -5,7 +5,7 @@ Replace all instances of "super secret token" with your actual token if you are 
 ##### Note:
 If you have never spoken with a Weeb.sh Developer and they told you, you have access to an Image-generation then you **cannot** use any of the Generation methods (they will error with missing Scope). If you have access to one that does not mean you have access to all. The scopes needed are in the comments and brackets on the example.
 # Official Documentation
-[Base Documentation](https://docs.weeb.sh/#)<br>
+[Base Documentation](https://gist.github.com/DasWolke/f9f8eb7bb9c4faeb10d33ab5bcc95898)<br>
 [Image Generation Documentation](https://gist.github.com/DasWolke/3b1f884ac7779faab7e1026feed78b6c)
 
 # Get Random Images
