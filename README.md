@@ -51,7 +51,7 @@ sh.getTags().then(array => {
 const weeb = require("weeb.js");
 
 const sh = new weeb("super secret token", "Weeb.js Example/v1.4.0");
-//User Agent (Optional)
+                                            //User Agent (Optional)
 //Requires you to have the Simple Image Gen Scope
 //Type can be won, awooo or eyes (Awooo supports hair and face as options which needs to be a hex code)
 
@@ -66,7 +66,7 @@ sh.generateImage("won").then(buffer => {
 const weeb = require("weeb.js");
 
 const sh = new weeb("super secret token", "Weeb.js Example/v1.4.0");
-//User Agent (Optional)
+                                            //User Agent (Optional)
 //Requires you to have the Simple Image Gen Scope
 //Status (first argument) can be "online", "dnd", "idle", "offline" or "streaming"
 
@@ -82,8 +82,8 @@ sh.generateDiscordMock("online", "https://cdn.discordapp.com/avatars/13258452529
 const weeb = require("weeb.js");
 
 const sh = new weeb("super secret token", "Weeb.js Example/v1.4.0");
+                                            //User Agent (Optional)
 
-//User Agent (Optional)
 const options = {
     title: "test",
     avatar: "https://cdn.discordapp.com/avatars/132584525296435200/a9f823c7a39a53f562fe8dcb6edf4607.webp",
@@ -102,7 +102,7 @@ sh.generateLicense(options).then(buffer => {
 ```js
 const weeb = require("weeb.js");
 const sh = new weeb("super secret token", "Weeb.js Example/v1.4.0");
-//User Agent (Optional)
+                                            //User Agent (Optional)
 
 const url = "https://cdn.discordapp.com/avatars/132584525296435200/3a0631c5d4df2a5e8795547964bd1027.webp";
 //Requires you to have the Waifu Image Gen Scope
