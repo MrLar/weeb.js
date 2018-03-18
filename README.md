@@ -133,14 +133,18 @@ sh.generateLoveShip(targetOne, targetTwo).then(buffer => {
 ```js
 const weeb = require("weeb.js");
 
-const sh = new weeb("super secret token", "Weeb.js Example/vv1.5.0");
+const sh = new weeb("super secret token", "Weeb.js Example/v1.5.0");
                                             //User Agent (Optional)
 
 sh.getVersion().then(v => {
+    console.log(v) //Version for weeb.js
+});
+
+sh.getVersion("images").then(v => {
     console.log(v) //Version for weeb.sh/images
 });
 
-sh.getVersion(true).then(v => {
+sh.getVersion("generation").then(v => {
     console.log(v) //Version for weeb.sh/auto-image
 });
 ```
