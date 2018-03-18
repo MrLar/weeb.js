@@ -1,6 +1,6 @@
 const weeb = require("../");
 
-const sh = new weeb("super secret token", "Weeb.js Example/v1.4.0");
+const sh = new weeb("super secret token", "Weeb.js Example/v1.5.0");
                                             //User Agent (Optional)
 //Requires you to have the Simple Image Gen Scope
 //Status (first argument) can be "online", "dnd", "idle", "offline" or "streaming"
