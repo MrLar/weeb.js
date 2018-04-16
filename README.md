@@ -8,9 +8,6 @@ If you have never spoken with a Weeb.sh Developer and they told you, you have ac
 [Base Documentation](https://gist.github.com/DasWolke/f9f8eb7bb9c4faeb10d33ab5bcc95898)<br>
 [Image Generation Documentation](https://gist.github.com/DasWolke/3b1f884ac7779faab7e1026feed78b6c)
 
-# DO NOT COPY PASTE THESE AND EXPECT THEM TO WORK
-Sometimes I used images in these examples that no longer exist, causing these examples to not always work. Please test it with working URL's and double check that you have said scopes before opening an issue or contacting me. Thanks.
-
 # Get Random Images
 ```js
 const weeb = require("weeb.js");
@@ -151,3 +148,6 @@ sh.getVersion("generation").then(v => {
     console.log(v) //Version for weeb.sh/auto-image
 });
 ```
+
+# DO NOT COPY PASTE THESE AND EXPECT THEM TO WORK
+Sometimes I used images in these examples that no longer exist, causing these examples to not always work. Please test it with working URL's and double check that you have said scopes before opening an issue or contacting me. Thanks.
