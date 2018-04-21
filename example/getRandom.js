@@ -1,10 +1,23 @@
 const weeb = require("../");
 
-const sh = new weeb("super secret token", "Weeb.js Example/v1.5.0");
+const sh = new weeb("super secret token", "Weeb.js Example/v1.6.0");
                                             //User Agent (Optional)
 
-sh.getRandom({type: "bite", nsfw: false, filetype: "gif"}).then(array => {
-    console.log(array[0]); //The url to the image
-    console.log(array[1]); //The ID of the image
-    console.log(array[2]); //The File type of the image
+sh.getRandom({type: "bite", nsfw: false, filetype: "gif"}).then(object => {
+    console.log(object)
+    // Example Object
+    /*
+     {
+        "id": "BJZfMrXwb",
+        "type": "awoo",
+        "baseType": "awoo",
+        "nsfw": false,
+        "fileType": "gif",
+        "mimeType": "image/gif",
+        "tags": [],
+        "url": "https://cdn.weeb.sh/images/BJZfMrXwb.gif",
+        "hidden": false,
+        "account": "HyxjFGfPb"
+    }
+    */
 });
