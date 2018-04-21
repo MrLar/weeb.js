@@ -127,27 +127,5 @@ sh.generateLoveShip(targetOne, targetTwo).then(buffer => {
 });
 ```
 
-
-# Get current versions
-
-```js
-const weeb = require("weeb.js");
-
-const sh = new weeb("super secret token", "Weeb.js Example/v1.5.0");
-                                            //User Agent (Optional)
-
-sh.getVersion().then(v => {
-    console.log(v) //Version for weeb.js
-});
-
-sh.getVersion("images").then(v => {
-    console.log(v) //Version for weeb.sh/images
-});
-
-sh.getVersion("generation").then(v => {
-    console.log(v) //Version for weeb.sh/auto-image
-});
-```
-
 # DO NOT COPY PASTE THESE AND EXPECT THEM TO WORK
 Sometimes I used images in these examples that no longer exist, causing these examples to not always work. Please test it with working URL's and double check that you have said scopes before opening an issue or contacting me. Thanks.
