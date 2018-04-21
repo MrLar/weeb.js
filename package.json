@@ -1,14 +1,11 @@
 {
   "name": "weeb.js",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "A wrapper for https://weeb.sh/",
   "main": "index.js",
   "directories": {
     "example": "example",
     "lib": "lib"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
