@@ -15,7 +15,7 @@ const weeb = require("weeb.js");
 const sh = new weeb("super secret token", "Weeb.js Example/v1.6.1");
                                             //User Agent (Optional)
 
-sh.getRandom({type: "bite", nsfw: false, filetype: "gif"}).then(object => {
+sh.getRandom({type: "awoo", nsfw: false, filetype: "gif"}).then(object => {
     console.log(object)
     // Example Object
     /*
