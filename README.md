@@ -1,4 +1,4 @@
-<a href="https://nodei.co/npm/weeb.js/"><img src="https://nodei.co/npm/weeb.js.png?downloads=true&stars=true" alt="NPM info" /></a>
+[![Weeb.js on NPM](https://img.shields.io/npm/v/weeb.js.svg)](https://www.npmjs.com/package/weeb.js) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 # Documentation
 [Official](https://docs.weeb.sh/)<br>
