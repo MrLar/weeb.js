@@ -1,0 +1,12 @@
+# Packages
+node_modules/
+
+# Misc
+.idea/
+
+
+# NPM ignore
+.eslintrc.json
+.gitignore
+.eslintignore
+.jsdoc.json

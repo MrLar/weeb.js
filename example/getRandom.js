@@ -1,12 +1,12 @@
-const weeb = require("../");
+const WeebJS = require('../')
 
-const sh = new weeb("super secret token", "Weeb.js Example/v1.6.1");
-                                            //User Agent (Optional)
+const WeebHandler = new WeebJS('super secret token', 'Weeb.js Example/v2.0.0')
+// User Agent (Optional)
 
-sh.getRandom({type: "bite", nsfw: false, filetype: "gif"}).then(object => {
-    console.log(object)
-    // Example Object
-    /*
+WeebHandler.getRandom({type: 'bite', nsfw: false, filetype: 'gif'}).then(object => {
+  console.log(object)
+  // Example Object
+  /*
      {
         "id": "BJZfMrXwb",
         "type": "awoo",
@@ -20,4 +20,4 @@ sh.getRandom({type: "bite", nsfw: false, filetype: "gif"}).then(object => {
         "account": "HyxjFGfPb"
     }
     */
-});
+})

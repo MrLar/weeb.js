@@ -1,7 +1,7 @@
-const weeb = require("../");
+const WeebJS = require('../')
 
-const sh = new weeb("super secret token", "Weeb.js Example/v1.6.1");
-                                            //User Agent (Optional)
-sh.getTags().then(array => {
-    console.log(array)
-});
+const WeebHandler = new WeebJS('super secret token', 'Weeb.js Example/v2.0.0')
+// User Agent (Optional)
+WeebHandler.getTags().then(array => {
+  console.log(array)
+})

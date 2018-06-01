@@ -1,23 +1,37 @@
 {
-  "name": "weeb.js",
-  "version": "1.6.1",
-  "description": "A wrapper for https://weeb.sh/",
-  "main": "index.js",
-  "directories": {
-    "example": "example",
-    "lib": "lib"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MrLar/weeb.js.git"
-  },
-  "author": "Lars K. (https://github.com/MrLar)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/MrLar/weeb.js/issues"
-  },
-  "homepage": "https://github.com/MrLar/weeb.js#readme",
-  "dependencies": {
-    "request": "^2.83.0"
-  }
+    "name": "weeb.js",
+    "version": "1.6.2",
+    "description": "A wrapper for https://weeb.sh/",
+    "main": "./lib/handler.js",
+    "directories": {
+        "example": "example",
+        "lib": "lib"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/MrLar/weeb.js.git"
+    },
+    "scripts": {
+        "build-docs": "node_modules/.bin/jsdoc -c jsdoc.json"
+    },
+    "author": "Lars K. (https://github.com/MrLar)",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/MrLar/weeb.js/issues"
+    },
+    "homepage": "https://github.com/MrLar/weeb.js#readme",
+    "dependencies": {
+        "axios": "^0.18.0"
+    },
+    "devDependencies": {
+        "docdash": "^0.4.0",
+        "eslint": "^4.19.1",
+        "eslint-config-standard": "^11.0.0",
+        "eslint-plugin-import": "^2.12.0",
+        "eslint-plugin-node": "^6.0.1",
+        "eslint-plugin-promise": "^3.8.0",
+        "eslint-plugin-react": "^7.8.2",
+        "eslint-plugin-standard": "^3.1.0",
+        "jsdoc": "^3.5.5"
+    }
 }

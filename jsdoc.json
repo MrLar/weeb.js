@@ -1,0 +1,17 @@
+{
+  "opts": {
+    "template": "node_modules/docdash",
+    "encoding": "utf8",
+    "destination": "./docs/"
+  },
+  "docdash": {
+    "static": false,
+    "sort": true
+  },
+  "source": {
+    "include": [
+      "lib",
+      "./README.md"
+    ]
+  }
+}

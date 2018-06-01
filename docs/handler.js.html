@@ -1,4 +1,43 @@
-const axios = require('axios')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>handler.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="WeebHandler.html">WeebHandler</a><ul class='methods'><li data-type='method'><a href="WeebHandler.html#generateDiscordMock">generateDiscordMock</a></li><li data-type='method'><a href="WeebHandler.html#generateImage">generateImage</a></li><li data-type='method'><a href="WeebHandler.html#generateInsult">generateInsult</a></li><li data-type='method'><a href="WeebHandler.html#generateLicense">generateLicense</a></li><li data-type='method'><a href="WeebHandler.html#generateLoveShip">generateLoveShip</a></li><li data-type='method'><a href="WeebHandler.html#getRandom">getRandom</a></li><li data-type='method'><a href="WeebHandler.html#getTags">getTags</a></li><li data-type='method'><a href="WeebHandler.html#getTypes">getTypes</a></li><li data-type='method'><a href="WeebHandler.html#requestAPI">requestAPI</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#BASE_URL">BASE_URL</a></li><li><a href="global.html#DISCORD_STATUSES">DISCORD_STATUSES</a></li><li><a href="global.html#ENDPOINTS">ENDPOINTS</a></li><li><a href="global.html#FILE_TYPES">FILE_TYPES</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">handler.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const axios = require('axios')
 const version = require('../package').version
 const {BASE_URL, ENDPOINTS, FILE_TYPES, DISCORD_STATUSES} = require('./base')
 
@@ -41,11 +80,11 @@ class WeebHandler {
    * @param {Object} [options={}] - Options for this request
    * @param {Boolean} [options.nsfw=false] - Whenever to include NSFW tags or not, can be true, false or only
    * @param {Boolean} [options.hidden=false] - Whenever to include hidden tags or not
-   * @return {Promise<WeebTagsResponse>}
+   * @return {Promise&lt;WeebTagsResponse>}
    */
   getTags (options = {}) {
-    if (options.hidden && typeof options.hidden !== 'boolean') throw new TypeError('Hidden must be a boolean')
-    if (options.nsfw && typeof options.nsfw !== 'boolean' && options.nsfw !== 'only') throw new Error('NSFW must either be true, false or only')
+    if (options.hidden &amp;&amp; typeof options.hidden !== 'boolean') throw new TypeError('Hidden must be a boolean')
+    if (options.nsfw &amp;&amp; typeof options.nsfw !== 'boolean' &amp;&amp; options.nsfw !== 'only') throw new Error('NSFW must either be true, false or only')
     const query = {nsfw: options.nsfw || false, hidden: options.hidden || false}
 
     return this.requestAPI('tags', query)
@@ -57,12 +96,12 @@ class WeebHandler {
    * @param {Boolean} [options.nsfw=false] - Whenever to include NSFW types or not, can be true, false or only
    * @param {Boolean} [options.hidden=false] - Whenever to include hidden types or not
    * @param {Boolean} [options.preview=false] - Whenever to include a preview for each type or not
-   * @return {Promise<WeebTypesResponse>}
+   * @return {Promise&lt;WeebTypesResponse>}
    */
   getTypes (options = {}) {
-    if (options.hidden && typeof options.hidden !== 'boolean') throw new TypeError('Hidden must be a boolean')
-    if (options.preview && typeof options.preview !== 'boolean') throw new TypeError('Preview must be a boolean')
-    if (options.nsfw && typeof options.nsfw !== 'boolean' && options.nsfw !== 'only') throw new Error('NSFW must either be true, false or only')
+    if (options.hidden &amp;&amp; typeof options.hidden !== 'boolean') throw new TypeError('Hidden must be a boolean')
+    if (options.preview &amp;&amp; typeof options.preview !== 'boolean') throw new TypeError('Preview must be a boolean')
+    if (options.nsfw &amp;&amp; typeof options.nsfw !== 'boolean' &amp;&amp; options.nsfw !== 'only') throw new Error('NSFW must either be true, false or only')
 
     const query = {nsfw: options.nsfw || false, hidden: options.hidden || false}
     // Preview just needs to be present to work even setting it to false would return previews
@@ -79,15 +118,15 @@ class WeebHandler {
    * @param {String} [options.type=null] - The type category the image should belong to
    * @param {Array} [options.tags=[]] - Tags the image should have
    * @param {String} [options.filetype=null] - The file type the image returned can have (png, jpg, jpeg, gif), null means all.
-   * @return {Promise<WeebImageReponse>}
+   * @return {Promise&lt;WeebImageReponse>}
    */
   getRandom (options = {}) {
-    if (!options.type && !options.tags) throw new Error('Either tags or type are required.')
-    if (options.tags && !(options.tags instanceof Array)) throw new TypeError('Tags is not an array')
-    if (options.nsfw && typeof options.nsfw !== 'boolean' && options.nsfw !== 'only') throw new Error('NSFW must either be true, false or only')
-    if (options.hidden && typeof options.hidden !== 'boolean') throw new TypeError('Hidden must be a boolean')
-    if (options.filetype && typeof options.filetype !== 'string') throw new TypeError('Filetype must be a string')
-    if (options.filetype && !FILE_TYPES.includes(options.filetype.toLowerCase())) throw new Error('Filetype must be either jpeg, jpg, png or gif')
+    if (!options.type &amp;&amp; !options.tags) throw new Error('Either tags or type are required.')
+    if (options.tags &amp;&amp; !(options.tags instanceof Array)) throw new TypeError('Tags is not an array')
+    if (options.nsfw &amp;&amp; typeof options.nsfw !== 'boolean' &amp;&amp; options.nsfw !== 'only') throw new Error('NSFW must either be true, false or only')
+    if (options.hidden &amp;&amp; typeof options.hidden !== 'boolean') throw new TypeError('Hidden must be a boolean')
+    if (options.filetype &amp;&amp; typeof options.filetype !== 'string') throw new TypeError('Filetype must be a string')
+    if (options.filetype &amp;&amp; !FILE_TYPES.includes(options.filetype.toLowerCase())) throw new Error('Filetype must be either jpeg, jpg, png or gif')
 
     const query = {
       hidden: options.hidden || false,
@@ -103,10 +142,10 @@ class WeebHandler {
    * Generate a Discord Status mock up using a given Image
    * @param {String} [statusIcon=online] - The status to mock, can be online, dnd, offline, streaming and idle
    * @param {String} url - The Image to perform the Mock on
-   * @return {Promise<Buffer|Object>}
+   * @return {Promise&lt;Buffer|Object>}
    */
   generateDiscordMock (url, statusIcon = null) {
-    if (statusIcon && !DISCORD_STATUSES.includes(statusIcon.toLowerCase())) throw new Error('Status can only be online, dnd, idle, offline or streaming.')
+    if (statusIcon &amp;&amp; !DISCORD_STATUSES.includes(statusIcon.toLowerCase())) throw new Error('Status can only be online, dnd, idle, offline or streaming.')
     if (!url.match(/^https?:\/\/.+\.(?:jpg|png|jpeg|gif|webp)$/g)) throw new Error('You need to prove a valid direct image URL.')
 
     const query = {status: statusIcon || 'online', avatar: encodeURIComponent(url) || ''}
@@ -119,14 +158,14 @@ class WeebHandler {
    * @param {Object} [options={}] - Options for this request (only used when type is awooo)
    * @param {String} [options.face=fff0d3] - The hex code to use for the Face color
    * @param {String} [options.hair=cc817c] - The hex code to use for the hair color
-   * @return {Promise<Buffer>}
+   * @return {Promise&lt;Buffer>}
    */
   generateImage (type, options = {}) {
-    if (typeof type !== 'string' || (type !== 'awooo' && type !== 'eyes' && type !== 'won')) throw new TypeError('Type must be a string and either awooo, eyes or won')
+    if (typeof type !== 'string' || (type !== 'awooo' &amp;&amp; type !== 'eyes' &amp;&amp; type !== 'won')) throw new TypeError('Type must be a string and either awooo, eyes or won')
 
-    if (type === 'awoo' && (options.hair || options.face)) {
-      if (options.hair && !options.hair.match(/^[0-9a-f]{6}$/gi)) throw new Error('Hair must be a valid hex code')
-      if (options.face && !options.face.match(/^[0-9a-f]{6}$/gi)) throw new Error('Face must be a valid hex code')
+    if (type === 'awoo' &amp;&amp; (options.hair || options.face)) {
+      if (options.hair &amp;&amp; !options.hair.match(/^[0-9a-f]{6}$/gi)) throw new Error('Hair must be a valid hex code')
+      if (options.face &amp;&amp; !options.face.match(/^[0-9a-f]{6}$/gi)) throw new Error('Face must be a valid hex code')
     }
     const query = {type, face: options.face || 'fff0d3', hair: options.hair || 'cc817c'}
     return this.requestAPI('generate', query)
@@ -139,12 +178,12 @@ class WeebHandler {
    *  @param {String} options.icon - The main icon for the License (needs to be a valid URL)
    *  @param {Array} [options.badges=[]} - Badges to display below the main Image (all of these need to be valid URLs)
    *  @param {Array} [options.widgets=[]} - Widget text to display right of the main icon
-   * @return {Promise<Buffer>}
+   * @return {Promise&lt;Buffer>}
    */
   generateLicense (options = {}) {
     if (typeof options.avatar !== 'string' || typeof options.title !== 'string') throw new TypeError('Both Title and Icon need to be given and must be a string.')
-    if (options.badges && (!(options.badges instanceof Array) || options.badges.length > 3 || options.badges.length < 1)) throw new TypeError('Badges must be an array that contains at least 1 and not more than 3 values')
-    if (options.widgets && (!(options.widgets instanceof Array) || options.widgets.length > 3 || options.widgets.length < 1)) throw new TypeError('Widgets must be an array that contains at least 1 and not more than 3 values')
+    if (options.badges &amp;&amp; (!(options.badges instanceof Array) || options.badges.length > 3 || options.badges.length &lt; 1)) throw new TypeError('Badges must be an array that contains at least 1 and not more than 3 values')
+    if (options.widgets &amp;&amp; (!(options.widgets instanceof Array) || options.widgets.length > 3 || options.widgets.length &lt; 1)) throw new TypeError('Widgets must be an array that contains at least 1 and not more than 3 values')
 
     return this.requestAPI('license', {
       title: options.title,
@@ -157,7 +196,7 @@ class WeebHandler {
   /**
    * Generate a Waifu insult using a given Image. Requires the generate_waifu_insult Scope!
    * @param {string} URL - The Image to waifu insult
-   * @return {Promise<Buffer>}
+   * @return {Promise&lt;Buffer>}
    */
   generateInsult (URL) {
     if (typeof URL !== 'string') throw new TypeError('The URL must be a string')
@@ -169,7 +208,7 @@ class WeebHandler {
    * Generate a Love Ship using 2 Images. Requires the generate_love_ship Scope!
    * @param {String} targetOne - URL pointing to the first Image
    * @param {String} targetTwo - URL pointing to the second Image
-   * @return {Promise<Buffer>}
+   * @return {Promise&lt;Buffer>}
    */
   generateLoveShip (targetOne, targetTwo) {
     if (typeof targetOne !== 'string' || typeof targetTwo !== 'string') throw new TypeError('Both targetOne and targetTwo need to be given and need to be a string')
@@ -182,7 +221,7 @@ class WeebHandler {
    * @param endpoint
    * @param query
    * @param isPost
-   * @return {Promise<Buffer|Object>}
+   * @return {Promise&lt;Buffer|Object>}
    */
   requestAPI (endpoint, query = {}, isPost = false) {
     return new Promise(async (resolve, reject) => {
@@ -197,7 +236,7 @@ class WeebHandler {
           res = await this.axios.get(ENDPOINTS[endpoint], {params: query})
         }
         let {data, status} = res
-        if (status < 200 || status > 300) reject(Buffer.isBuffer(data) ? data.toString() : data)
+        if (status &lt; 200 || status > 300) reject(Buffer.isBuffer(data) ? data.toString() : data)
         else resolve(data)
       } catch (err) {
         reject(err)
@@ -207,3 +246,22 @@ class WeebHandler {
 }
 
 module.exports = WeebHandler
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Jun 01 2018 20:40:35 GMT+0200 (W. Europe Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
