@@ -1,7 +1,8 @@
 const WeebJS = require('../../index')
 
 const WeebHandler = new WeebJS('super secret token', 'Weeb.js Example/v2.0.0')
-// User Agent (Optional)
+                                                     // User Agent (Optional)
+
 // Requires you to have the Simple Image Gen Scope
 // Status (first argument) can be "online", "dnd", "idle", "offline" or "streaming"
 
