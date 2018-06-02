@@ -56,7 +56,7 @@ class WeebJS {
   }
 }
 
-exports = WeebJS
+module.exports = WeebJS
 
 module.exports.images = WeebImages
 module.exports.korra = WeebImages
