@@ -2,7 +2,7 @@
     "name": "weeb.js",
     "version": "2.0.0",
     "description": "A wrapper for https://weeb.sh/",
-    "main": "./lib/handler.js",
+    "main": "./index.js",
     "directories": {
         "example": "example",
         "lib": "lib"
@@ -12,7 +12,9 @@
         "url": "git+https://github.com/MrLar/weeb.js.git"
     },
     "scripts": {
-        "build-docs": "node_modules/.bin/jsdoc -c jsdoc.json"
+        "build-docs": "node_modules/.bin/jsdoc -c jsdoc.json",
+        "lint": "eslint .",
+        "lint-fix": "eslint . --fix"
     },
     "author": "Lars K. (https://github.com/MrLar)",
     "license": "MIT",
@@ -21,7 +23,8 @@
     },
     "homepage": "https://github.com/MrLar/weeb.js#readme",
     "dependencies": {
-        "axios": "^0.18.0"
+        "axios": "^0.18.0",
+        "taihou": "^1.0.1"
     },
     "devDependencies": {
         "docdash": "^0.4.0",

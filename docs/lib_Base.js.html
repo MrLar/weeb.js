@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>lib/Base.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,59 +27,66 @@
 
 <div id="main">
     
+    <h1 class="page-title">lib/Base.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const Error = require('./Error')
+const constants = require('./constants')
+/**
+ * Main Handler for Weeb.sh
+ */
+class Base {
+  /**
+   * @class Base - Main handler for all Weeb.sh request
+   */
+  constructor () {
+    /**
+     * Error constructor
+     * @type {WeebJSError}
+     */
+    this.Error = Error
+  }
 
+  /**
+   * Send a request to Weeb.sh
+   * @param {String} endpoint - The endpoint to make the request to
+   * @param {Object} query - Query string params or Post options if method is post
+   * @param {Boolean} [isPost=false] - Whenever this is a post or a get
+   * @return {Promise&lt;Buffer|Object>}
+   */
+  requestAPI (endpoint, query = {}, isPost = false) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let res
+        if (isPost) {
+          res = await this.axios.post(constants.ENDPOINTS[endpoint], query, {
+            headers: {'Content-Type': 'application/json'},
+            responseType: 'arraybuffer'
+          })
+        } else {
+          res = await this.axios.get(constants.ENDPOINTS[endpoint], {params: query, responseType: ['discord_status', 'generate'].includes(endpoint) ? 'arraybuffer' : null})
+        }
+        let {data, status} = res
+        if (status &lt; 200 || status > 300) reject(Buffer.isBuffer(data) ? data.toString() : data)
+        else resolve(data)
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+}
 
-
-
-
-
-
-
-
-    
-
-
-    <section class="readme">
-        <article><p><a href="https://www.npmjs.com/package/weeb.js"><img src="https://img.shields.io/npm/v/weeb.js.svg" alt="Weeb.js on NPM"></a> <a href="https://standardjs.com"><img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg" alt="JavaScript Style Guide"></a></p>
-<h1>Documentation</h1><p><a href="https://docs.weeb.sh/">Official</a><br>
-<a href="https://mrlar.github.io/weeb.js/">Wrapper</a></p>
-<h1>Installation</h1><p>Install Weeb.js via yarn or npm</p>
-<pre class="prettyprint source"><code>yarn add weeb.js
-npm i weeb.js</code></pre><h1>Getting Started</h1><p>Very Basic usage example:</p>
-<pre class="prettyprint source lang-js"><code>const WeebJS = require('weeb.js');
-
-// Initializing the Client (replace &lt;token> with your actual token)
-
-// When using a Wolke token  with your token (Please note that almost all new tokens are wolke tokens)
-const WeebHandler = new WeebJS('Wolke &lt;token>');
-// or 
-const WeebHandler = new WeebJS('&lt;token>');
-
-// When Using a bearer token
-const WeebHandler = new WeebJS('Bearer &lt;token>')
-
-// Specifying a User-Agent (Formatted as NAME/VERSION or NAME/VERSION/ENV)
-const WeebHandler = new WeebJS(token /* See above */ , 'Weeb.js Example/V2.0.0')
-
-// Request a random bite gif
-WeebHandler.images.getRandom({type: 'bite', fileType: 'gif'}).then(imageObj => console.log(imageObj))
-
-// Using a Submodule individualy
-const WeebImageHandler = new WeebJS.images(token /* See above */ , 'Weeb.js Example/V2.0.0')
-// or
-const {images} = require('weeb.js');
-const WeebImageHandler = new images(token /* See above */ , 'Weeb.js Example/V2.0.0')
-
-WeebImageHandler.getRandom({type: 'bite', fileType: 'gif'}).then(imageObj => console.log(imageObj))</code></pre><h3>For all usages please visit the Wrapper documentation up above</h3></article>
+module.exports = Base
+</code></pre>
+        </article>
     </section>
-
-
 
 
 

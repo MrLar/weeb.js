@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Base.js - Documentation</title>
+    <title>Error.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,7 +27,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Base.js</h1>
+    <h1 class="page-title">Error.js</h1>
     
 
     
@@ -37,49 +37,35 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const Error = require('./Error')
-const constants = require('./constants')
-/**
- * Main Handler for Weeb.sh
+            <pre class="prettyprint source linenums"><code>/**
+ * Only the message and stack property are guaranteed, as all the other properties can appear only if the error originated from the request
+ *
+ * @extends Error
+ * @property {string} message - Message that describes this error
+ * @property {string} stack - The stacktrace of the error the error originated from
+ * @property {number} [code] - The HTTP code of the error (only if the error came from the request)
+ * @property {string|object} [data] - Data that was send alongside the request that threw this error
+ * @property {any} [originalRequest] - The request that was send
+ * @property {any} [config] - The config of the sent request
  */
-class Base {
-  /**
-   * @class Base - Main handler for all Weeb.sh request
-   */
-  constructor () {
-      this.Error = Error
-  }
-
-  /**
-   * Send a request to Weeb.sh
-   * @param endpoint
-   * @param query
-   * @param isPost
-   * @return {Promise&lt;Buffer|Object>}
-   */
-  requestAPI (endpoint, query = {}, isPost = false) {
-    return new Promise(async (resolve, reject) => {
-      try {
-        let res
-        if (isPost) {
-          res = await this.axios.post(constants.ENDPOINTS[endpoint], query, {
-            headers: {'Content-Type': 'application/json'},
-            responseType: 'arraybuffer'
-          })
-        } else {
-          res = await this.axios.get(constants.ENDPOINTS[endpoint], {params: query, responseType: ['discord_status', 'generate'].includes(endpoint) ? 'arraybuffer' : null})
-        }
-        let {data, status} = res
-        if (status &lt; 200 || status > 300) reject(Buffer.isBuffer(data) ? data.toString() : data)
-        else resolve(data)
-      } catch (err) {
-        reject(err)
+class WeebJSError extends Error {
+    constructor(err, _stack) {
+      super(err);
+      if (err.response &amp;&amp; err.response.status) {
+        this.code = err.code === "ECONNABORTED" ? 408 : err.response.status;
+        this.message = err.code === "ECONNABORTED" ? 'timeout' : `${err.response.status} ${err.response.statusText}`;
+        this.data = err.code === "ECONNABORTED" ? 'Request timed out' : err.response.data;
+        this.originalRequest = err.request;
+        this.config = err.config;
       }
-    })
-  }
+      // Error.captureStackTrace has it's own Name and Message property that would win when assigning the stack
+      _stack.message = this.message
+      _stack.name = 'WeebJSError'
+      this.stack = _stack.stack
+    }
 }
 
-module.exports = Base
+module.exports = WeebJSError
 </code></pre>
         </article>
     </section>

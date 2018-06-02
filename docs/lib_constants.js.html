@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>lib/constants.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,59 +27,66 @@
 
 <div id="main">
     
+    <h1 class="page-title">lib/constants.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Base URL for all API requests
+ * @default
+ * @constant
+ * @type {string}
+ */
+const BASE_URL = 'https://api.weeb.sh'
 
-
-
-
-
-
-
-
-
-    
-
-
-    <section class="readme">
-        <article><p><a href="https://www.npmjs.com/package/weeb.js"><img src="https://img.shields.io/npm/v/weeb.js.svg" alt="Weeb.js on NPM"></a> <a href="https://standardjs.com"><img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg" alt="JavaScript Style Guide"></a></p>
-<h1>Documentation</h1><p><a href="https://docs.weeb.sh/">Official</a><br>
-<a href="https://mrlar.github.io/weeb.js/">Wrapper</a></p>
-<h1>Installation</h1><p>Install Weeb.js via yarn or npm</p>
-<pre class="prettyprint source"><code>yarn add weeb.js
-npm i weeb.js</code></pre><h1>Getting Started</h1><p>Very Basic usage example:</p>
-<pre class="prettyprint source lang-js"><code>const WeebJS = require('weeb.js');
-
-// Initializing the Client (replace &lt;token> with your actual token)
-
-// When using a Wolke token  with your token (Please note that almost all new tokens are wolke tokens)
-const WeebHandler = new WeebJS('Wolke &lt;token>');
-// or 
-const WeebHandler = new WeebJS('&lt;token>');
-
-// When Using a bearer token
-const WeebHandler = new WeebJS('Bearer &lt;token>')
-
-// Specifying a User-Agent (Formatted as NAME/VERSION or NAME/VERSION/ENV)
-const WeebHandler = new WeebJS(token /* See above */ , 'Weeb.js Example/V2.0.0')
-
-// Request a random bite gif
-WeebHandler.images.getRandom({type: 'bite', fileType: 'gif'}).then(imageObj => console.log(imageObj))
-
-// Using a Submodule individualy
-const WeebImageHandler = new WeebJS.images(token /* See above */ , 'Weeb.js Example/V2.0.0')
-// or
-const {images} = require('weeb.js');
-const WeebImageHandler = new images(token /* See above */ , 'Weeb.js Example/V2.0.0')
-
-WeebImageHandler.getRandom({type: 'bite', fileType: 'gif'}).then(imageObj => console.log(imageObj))</code></pre><h3>For all usages please visit the Wrapper documentation up above</h3></article>
+/**
+ * All available Endpoints to be used
+ * @default
+ * @type {Object}
+ */
+const ENDPOINTS = {
+  tags: '/images/tags',
+  types: '/images/types',
+  random: '/images/random',
+  generate: '/auto-image/generate',
+  discord_status: '/auto-image/discord-status',
+  license: '/auto-image/license',
+  waifu_insult: '/auto-image/waifu-insult',
+  love_ship: '/auto-image/love-ship'
+}
+/**
+ * All available file types to be used in {@link WeebHandler#getRandom}
+ * @default
+ * @type {string[]}
+ */
+const FILE_TYPES = [
+  'jpeg',
+  'jpg',
+  'png',
+  'gif'
+]
+/**
+ * All available discord status types to be used in {@link WeebHandler#generateDiscordMock}
+ * @default
+ * @type {string[]}
+ */
+const DISCORD_STATUSES = [
+  'online',
+  'idle',
+  'dnd',
+  'offline',
+  'streaming'
+]
+module.exports = {BASE_URL, ENDPOINTS, FILE_TYPES, DISCORD_STATUSES}
+</code></pre>
+        </article>
     </section>
-
-
 
 
 

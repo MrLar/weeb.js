@@ -10,8 +10,10 @@
   },
   "source": {
     "include": [
+      "lib/Images",
       "lib",
-      "./README.md"
+      "./README.md",
+      "./index.js"
     ]
   }
 }

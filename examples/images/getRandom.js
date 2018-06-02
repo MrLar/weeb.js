@@ -1,9 +1,9 @@
-const WeebJS = require('../')
+const WeebJS = require('../../index')
 
 const WeebHandler = new WeebJS('super secret token', 'Weeb.js Example/v2.0.0')
 // User Agent (Optional)
 
-WeebHandler.getRandom({type: 'bite', nsfw: false, filetype: 'gif'}).then(object => {
+WeebHandler.images.getRandom({type: 'bite', nsfw: false, filetype: 'gif'}).then(object => {
   console.log(object)
   // Example Object
   /*
@@ -20,4 +20,4 @@ WeebHandler.getRandom({type: 'bite', nsfw: false, filetype: 'gif'}).then(object 
         "account": "HyxjFGfPb"
     }
     */
-})
+}).catch(err => console.error(`Something went wrong :<, ${err}`))

@@ -26,15 +26,15 @@
 </nav>
 
 <div id="main">
-    
+
     <h1 class="page-title">handler.js</h1>
-    
-
-    
 
 
 
-    
+
+
+
+
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>const axios = require('axios')
@@ -69,7 +69,7 @@ class WeebHandler {
     this.key = type + ' ' + key.slice(toSlice).trim()
 
     /**
-     * Axios Client to make all request to Weeb.sj
+     * Axios Client to make all request to Weeb.js
      * @type {axios}
      */
     this.axios = axios.create({baseURL: BASE_URL, headers: {'Authorization': this.key, 'User-Agent': this.agent}})

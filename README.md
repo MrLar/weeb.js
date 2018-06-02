@@ -32,7 +32,15 @@ const WeebHandler = new WeebJS('Bearer <token>')
 const WeebHandler = new WeebJS(token /* See above */ , 'Weeb.js Example/V2.0.0')
 
 // Request a random bite gif
-WeebHandler.getRandom({type: 'bite', fileType: 'gif'}).then(imageObj => console.log(imageObj))
+WeebHandler.images.getRandom({type: 'bite', fileType: 'gif'}).then(imageObj => console.log(imageObj))
+
+// Using a Submodule individualy
+const WeebImageHandler = new WeebJS.images(token /* See above */ , 'Weeb.js Example/V2.0.0')
+// or
+const {images} = require('weeb.js');
+const WeebImageHandler = new images(token /* See above */ , 'Weeb.js Example/V2.0.0')
+
+WeebImageHandler.getRandom({type: 'bite', fileType: 'gif'}).then(imageObj => console.log(imageObj))
 ```
 
 ### For all usages please visit the Wrapper documentation up above

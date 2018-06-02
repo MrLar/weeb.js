@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Base.js - Documentation</title>
+    <title>constants.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,7 +27,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Base.js</h1>
+    <h1 class="page-title">constants.js</h1>
     
 
     
@@ -37,49 +37,53 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const Error = require('./Error')
-const constants = require('./constants')
-/**
- * Main Handler for Weeb.sh
+            <pre class="prettyprint source linenums"><code>/**
+ * Base URL for all API requests
+ * @default
+ * @constant
+ * @type {string}
  */
-class Base {
-  /**
-   * @class Base - Main handler for all Weeb.sh request
-   */
-  constructor () {
-      this.Error = Error
-  }
+const BASE_URL = 'https://api.weeb.sh'
 
-  /**
-   * Send a request to Weeb.sh
-   * @param endpoint
-   * @param query
-   * @param isPost
-   * @return {Promise&lt;Buffer|Object>}
-   */
-  requestAPI (endpoint, query = {}, isPost = false) {
-    return new Promise(async (resolve, reject) => {
-      try {
-        let res
-        if (isPost) {
-          res = await this.axios.post(constants.ENDPOINTS[endpoint], query, {
-            headers: {'Content-Type': 'application/json'},
-            responseType: 'arraybuffer'
-          })
-        } else {
-          res = await this.axios.get(constants.ENDPOINTS[endpoint], {params: query, responseType: ['discord_status', 'generate'].includes(endpoint) ? 'arraybuffer' : null})
-        }
-        let {data, status} = res
-        if (status &lt; 200 || status > 300) reject(Buffer.isBuffer(data) ? data.toString() : data)
-        else resolve(data)
-      } catch (err) {
-        reject(err)
-      }
-    })
-  }
+/**
+ * All available Endpoints to be used
+ * @default
+ * @type {Object}
+ */
+const ENDPOINTS = {
+  tags: '/images/tags',
+  types: '/images/types',
+  random: '/images/random',
+  generate: '/auto-image/generate',
+  discord_status: '/auto-image/discord-status',
+  license: '/auto-image/license',
+  waifu_insult: '/auto-image/waifu-insult',
+  love_ship: '/auto-image/love-ship'
 }
-
-module.exports = Base
+/**
+ * All available file types to be used in {@link WeebHandler#getRandom}
+ * @default
+ * @type {string[]}
+ */
+const FILE_TYPES = [
+  'jpeg',
+  'jpg',
+  'png',
+  'gif'
+]
+/**
+ * All available discord status types to be used in {@link WeebHandler#generateDiscordMock}
+ * @default
+ * @type {string[]}
+ */
+const DISCORD_STATUSES = [
+  'online',
+  'idle',
+  'dnd',
+  'offline',
+  'streaming'
+]
+module.exports = {BASE_URL, ENDPOINTS, FILE_TYPES, DISCORD_STATUSES}
 </code></pre>
         </article>
     </section>
