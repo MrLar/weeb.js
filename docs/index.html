@@ -22,7 +22,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Base.html">Base</a><ul class='methods'><li data-type='method'><a href="Base.html#requestAPI">requestAPI</a></li></ul></li><li><a href="WeebImages.html">WeebImages</a><ul class='methods'><li data-type='method'><a href="WeebImages.html#generateDiscordMock">generateDiscordMock</a></li><li data-type='method'><a href="WeebImages.html#generateImage">generateImage</a></li><li data-type='method'><a href="WeebImages.html#generateInsult">generateInsult</a></li><li data-type='method'><a href="WeebImages.html#generateLicense">generateLicense</a></li><li data-type='method'><a href="WeebImages.html#generateLoveShip">generateLoveShip</a></li><li data-type='method'><a href="WeebImages.html#getRandom">getRandom</a></li><li data-type='method'><a href="WeebImages.html#getTags">getTags</a></li><li data-type='method'><a href="WeebImages.html#getTypes">getTypes</a></li></ul></li><li><a href="WeebJS.html">WeebJS</a></li><li><a href="WeebJSError.html">WeebJSError</a></li></ul><h3>Global</h3><ul><li><a href="global.html#BASE_URL">BASE_URL</a></li><li><a href="global.html#DISCORD_STATUSES">DISCORD_STATUSES</a></li><li><a href="global.html#ENDPOINTS">ENDPOINTS</a></li><li><a href="global.html#FILE_TYPES">FILE_TYPES</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="WeebError.html">WeebError</a></li><li><a href="WeebImageGeneration.html">WeebImageGeneration</a><ul class='methods'><li data-type='method'><a href="WeebImageGeneration.html#generateDiscordMock">generateDiscordMock</a></li><li data-type='method'><a href="WeebImageGeneration.html#generateImage">generateImage</a></li><li data-type='method'><a href="WeebImageGeneration.html#generateInsult">generateInsult</a></li><li data-type='method'><a href="WeebImageGeneration.html#generateLicense">generateLicense</a></li><li data-type='method'><a href="WeebImageGeneration.html#generateLoveShip">generateLoveShip</a></li></ul></li><li><a href="WeebImages.html">WeebImages</a><ul class='methods'><li data-type='method'><a href="WeebImages.html#getRandom">getRandom</a></li><li data-type='method'><a href="WeebImages.html#getTags">getTags</a></li><li data-type='method'><a href="WeebImages.html#getTypes">getTypes</a></li></ul></li><li><a href="WeebJS.html">WeebJS</a></li></ul><h3>Global</h3><ul><li><a href="global.html#BASE_URL">BASE_URL</a></li><li><a href="global.html#DISCORD_STATUSES">DISCORD_STATUSES</a></li><li><a href="global.html#ENDPOINTS">ENDPOINTS</a></li><li><a href="global.html#FILE_TYPES">FILE_TYPES</a></li></ul>
 </nav>
 
 <div id="main">
@@ -51,32 +51,94 @@
 <a href="https://mrlar.github.io/weeb.js/">Wrapper</a></p>
 <h1>Installation</h1><p>Install Weeb.js via yarn or npm</p>
 <pre class="prettyprint source"><code>yarn add weeb.js
-npm i weeb.js</code></pre><h1>Getting Started</h1><p>Very Basic usage example:</p>
-<pre class="prettyprint source lang-js"><code>const WeebJS = require('weeb.js');
+npm i weeb.js</code></pre><h1>Getting Started</h1><pre class="prettyprint source lang-js"><code>const WeebJS = require('weeb.js');
 
-// Initializing the Client (replace &lt;token> with your actual token)
+const WeebHandler = new WeebJS('token', true, options /* See below */)
 
-// When using a Wolke token  with your token (Please note that almost all new tokens are wolke tokens)
-const WeebHandler = new WeebJS('Wolke &lt;token>');
-// or 
-const WeebHandler = new WeebJS('&lt;token>');
+// Request a random Bite gif
+WeebHandler.images.getRandom({type: 'bite', nsfw: false, filetype: 'gif'}).then(object => {
+  console.log(object)
+}).catch(err => console.error(`Something went wrong :&lt;, ${err}`))
 
-// When Using a bearer token
-const WeebHandler = new WeebJS('Bearer &lt;token>')
+// Generate a Discord Status Mockup
+WeebHandler.imageGeneration.generateDiscordMock('https://cdn.discordapp.com/avatars/132584525296435200/a_8a64055b16fc9415954203b0f542dbde.gif', 'online').then(buffer => {
+  console.log(buffer)
+}).catch(err => console.error(`Something went wrong :&lt;, ${err}`))</code></pre><h1>Weeb.js Options</h1><table>
+<thead>
+<tr>
+<th style="text-align:left">Option</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Optional?</th>
+<th style="text-align:left">Default</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">axios</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">yes</td>
+<td style="text-align:left">{}</td>
+<td style="text-align:left"><a href="https://github.com/axios/axios#request-config">Options for the Axios instance</a></td>
+</tr>
+<tr>
+<td style="text-align:left">requestsPerMinute</td>
+<td style="text-align:left">Number</td>
+<td style="text-align:left">yes</td>
+<td style="text-align:left">500</td>
+<td style="text-align:left">Amount of maximum requests per minute</td>
+</tr>
+<tr>
+<td style="text-align:left">burst</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">yes</td>
+<td style="text-align:left">false</td>
+<td style="text-align:left">Whenever to handle requests in burst mode</td>
+</tr>
+<tr>
+<td style="text-align:left">userAgent</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">yes</td>
+<td style="text-align:left">Weeb.js/{version}</td>
+<td style="text-align:left">User-Agent Header to attach to every request formatted as NAME/VERSION or NAME/VERSION/ENV</td>
+</tr>
+<tr>
+<td style="text-align:left">images</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">yes</td>
+<td style="text-align:left">{}</td>
+<td style="text-align:left">Seperate request options to use only for the WeebImages sub module. Can be any of the above. (You can also use WeebOptions.toph)</td>
+</tr>
+<tr>
+<td style="text-align:left">imageGeneration</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">yes</td>
+<td style="text-align:left">{}</td>
+<td style="text-align:left">Seperate request options to use only for the WeebImageGeneration sub module.  Can be any of the above. (You can also use WeebOptions.toph)</td>
+</tr>
+</tbody>
+</table>
+<h1>Using Sub Modules Seperately</h1><p>Works with all modules (images, imageGeneration)</p>
+<pre class="prettyprint source lang-js"><code>// Non deconstructing
+const WeebJSImages = require('weeb.js').images;
+const WeebImageHandler = new WeebJSImages('token', true, options /* See above */)
 
-// Specifying a User-Agent (Formatted as NAME/VERSION or NAME/VERSION/ENV)
-const WeebHandler = new WeebJS(token /* See above */ , 'Weeb.js Example/V2.0.0')
-
-// Request a random bite gif
-WeebHandler.images.getRandom({type: 'bite', fileType: 'gif'}).then(imageObj => console.log(imageObj))
-
-// Using a Submodule individualy
-const WeebImageHandler = new WeebJS.images(token /* See above */ , 'Weeb.js Example/V2.0.0')
-// or
+// Desconstructing
 const {images} = require('weeb.js');
-const WeebImageHandler = new images(token /* See above */ , 'Weeb.js Example/V2.0.0')
+const WeebImageHandler = new images('token', true, options /* See above*/)
 
-WeebImageHandler.getRandom({type: 'bite', fileType: 'gif'}).then(imageObj => console.log(imageObj))</code></pre><h3>For all usages please visit the Wrapper documentation up above</h3></article>
+// Note you don't have to specify &lt;WeebOptions>.images for this if it's not present the global onses are used.
+
+// Request a random Bite gif
+WeebHandler.images.getRandom({type: 'bite', nsfw: false, filetype: 'gif'}).then(object => {
+  console.log(object)
+}).catch(err => console.error(`Something went wrong :&lt;, ${err}`))</code></pre><h1>Using your own Axios instance</h1><p>Works with both the main module and seperate sub-modules</p>
+<pre class="prettyprint source lang-js"><code>const WeebJS = require('weeb.js');
+const axios = require('axios');
+
+const axiosInstance = axios.create({ /* Axios config */ })
+
+const WeebHandler = new WeebJS('token', true, options /* See above */, axiosInstance)</code></pre><h3>For all usages please visit the Wrapper documentation up above</h3></article>
     </section>
 
 
@@ -89,7 +151,7 @@ WeebImageHandler.getRandom({type: 'bite', fileType: 'gif'}).then(imageObj => con
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Jun 02 2018 16:33:17 GMT+0200 (W. Europe Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Jun 03 2018 12:12:58 GMT+0200 (W. Europe Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

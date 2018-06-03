@@ -2,15 +2,16 @@
   "opts": {
     "template": "node_modules/docdash",
     "encoding": "utf8",
-    "destination": "./docs/"
+    "destination": "./docs/",
+    "recurse": true
   },
   "docdash": {
     "static": false,
     "sort": true
   },
   "source": {
+    "includePattern": ".*\\\\.+\\.js(doc|x)?$",
     "include": [
-      "lib/Images",
       "lib",
       "./README.md",
       "./index.js"

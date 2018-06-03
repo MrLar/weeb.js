@@ -22,7 +22,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Base.html">Base</a><ul class='methods'><li data-type='method'><a href="Base.html#requestAPI">requestAPI</a></li></ul></li><li><a href="WeebImages.html">WeebImages</a><ul class='methods'><li data-type='method'><a href="WeebImages.html#generateDiscordMock">generateDiscordMock</a></li><li data-type='method'><a href="WeebImages.html#generateImage">generateImage</a></li><li data-type='method'><a href="WeebImages.html#generateInsult">generateInsult</a></li><li data-type='method'><a href="WeebImages.html#generateLicense">generateLicense</a></li><li data-type='method'><a href="WeebImages.html#generateLoveShip">generateLoveShip</a></li><li data-type='method'><a href="WeebImages.html#getRandom">getRandom</a></li><li data-type='method'><a href="WeebImages.html#getTags">getTags</a></li><li data-type='method'><a href="WeebImages.html#getTypes">getTypes</a></li></ul></li><li><a href="WeebJS.html">WeebJS</a></li><li><a href="WeebJSError.html">WeebJSError</a></li></ul><h3>Global</h3><ul><li><a href="global.html#BASE_URL">BASE_URL</a></li><li><a href="global.html#DISCORD_STATUSES">DISCORD_STATUSES</a></li><li><a href="global.html#ENDPOINTS">ENDPOINTS</a></li><li><a href="global.html#FILE_TYPES">FILE_TYPES</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="WeebError.html">WeebError</a></li><li><a href="WeebImageGeneration.html">WeebImageGeneration</a><ul class='methods'><li data-type='method'><a href="WeebImageGeneration.html#generateDiscordMock">generateDiscordMock</a></li><li data-type='method'><a href="WeebImageGeneration.html#generateImage">generateImage</a></li><li data-type='method'><a href="WeebImageGeneration.html#generateInsult">generateInsult</a></li><li data-type='method'><a href="WeebImageGeneration.html#generateLicense">generateLicense</a></li><li data-type='method'><a href="WeebImageGeneration.html#generateLoveShip">generateLoveShip</a></li></ul></li><li><a href="WeebImages.html">WeebImages</a><ul class='methods'><li data-type='method'><a href="WeebImages.html#getRandom">getRandom</a></li><li data-type='method'><a href="WeebImages.html#getTags">getTags</a></li><li data-type='method'><a href="WeebImages.html#getTypes">getTypes</a></li></ul></li><li><a href="WeebJS.html">WeebJS</a></li></ul><h3>Global</h3><ul><li><a href="global.html#BASE_URL">BASE_URL</a></li><li><a href="global.html#DISCORD_STATUSES">DISCORD_STATUSES</a></li><li><a href="global.html#ENDPOINTS">ENDPOINTS</a></li><li><a href="global.html#FILE_TYPES">FILE_TYPES</a></li></ul>
 </nav>
 
 <div id="main">
@@ -57,7 +57,7 @@
     <h2>Constructor</h2>
     
 
-    <h4 class="name" id="WeebJS"><span class="type-signature"></span>new WeebJS<span class="signature">(key, agent<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="WeebJS"><span class="type-signature"></span>new WeebJS<span class="signature">(key, wolken, options<span class="signature-attributes">opt</span>, customAxios<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
 
     
 
@@ -69,7 +69,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line9">line 9</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line28">line 28</a>
     </li></ul></dd>
     
 
@@ -182,13 +182,48 @@
 
         <tr>
             
-                <td class="name"><code>agent</code></td>
+                <td class="name"><code>wolken</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Whenever or not the token is a wolke token (please note almost all new tokens are wolke tokens)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#WeebJSOptions">WeebJSOptions</a></span>
 
 
             
@@ -209,12 +244,51 @@
             
                 <td class="default">
                 
-                    <code>Weeb.js/{version}</code>
+                    <code>null</code>
                 
                 </td>
             
 
-            <td class="description last">The User Agent to attach to all requests (Formatted as NAME/VERSION or NAME/VERSION/ENV)</td>
+            <td class="description last">Options for all requests</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>customAxios</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Axios</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>null</code>
+                
+                </td>
+            
+
+            <td class="description last">A custom axios instance</td>
         </tr>
 
     
@@ -254,79 +328,6 @@
 
         
             
-<h4 class="name" id="agent"><span class="type-signature"></span>agent<span class="type-signature"> :string</span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line26">line 26</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    User Agent that is being attached to all requests
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">string</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-
-        
-            
 <h4 class="name" id="axios"><span class="type-signature"></span>axios<span class="type-signature"> :axios</span></h4>
 
 
@@ -338,7 +339,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line37">line 37</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line49">line 49</a>
     </li></ul></dd>
     
 
@@ -400,6 +401,79 @@
 
         
             
+<h4 class="name" id="imageGeneration"><span class="type-signature"></span>imageGeneration<span class="type-signature"> :<a href="WeebImageGeneration.html">WeebImageGeneration</a></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line68">line 68</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Image Generation Sub Module
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="WeebImageGeneration.html">WeebImageGeneration</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
 <h4 class="name" id="images"><span class="type-signature"></span>images<span class="type-signature"> :<a href="WeebImages.html">WeebImages</a></span></h4>
 
 
@@ -411,7 +485,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line45">line 45</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line57">line 57</a>
     </li></ul></dd>
     
 
@@ -473,7 +547,7 @@
 
         
             
-<h4 class="name" id="key"><span class="type-signature"></span>key<span class="type-signature"> :string</span></h4>
+<h4 class="name" id="korra"><span class="type-signature"></span>korra<span class="type-signature"> :<a href="WeebImageGeneration.html">WeebImageGeneration</a></span></h4>
 
 
 
@@ -484,7 +558,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line31">line 31</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line73">line 73</a>
     </li></ul></dd>
     
 
@@ -524,7 +598,7 @@
 
 
 <div class="description">
-    Authorization Key used for all requests
+    Alternative for <a href="WeebJS.html#imageGeneration">WeebJS#imageGeneration</a>
 </div>
 
 
@@ -533,80 +607,7 @@
     <ul>
         <li>
             
-<span class="param-type">string</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="korra"><span class="type-signature"></span>korra<span class="type-signature"> :<a href="WeebImages.html">WeebImages</a></span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line50">line 50</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    Alternative for <a href="WeebJS.html#images">WeebJS#images</a>
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><a href="WeebImages.html">WeebImages</a></span>
+<span class="param-type"><a href="WeebImageGeneration.html">WeebImageGeneration</a></span>
 
 
         </li>
@@ -630,7 +631,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line55">line 55</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line62">line 62</a>
     </li></ul></dd>
     
 
@@ -710,7 +711,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Jun 02 2018 16:33:17 GMT+0200 (W. Europe Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Jun 03 2018 12:12:58 GMT+0200 (W. Europe Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

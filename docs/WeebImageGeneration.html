@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>WeebImages - Documentation</title>
+    <title>WeebImageGeneration - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,7 +27,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">WeebImages</h1>
+    <h1 class="page-title">WeebImageGeneration</h1>
     
 
     
@@ -40,10 +40,10 @@
 <header>
     
         <h2>
-        WeebImages
+        WeebImageGeneration
         </h2>
         
-            <div class="class-description">Submodule of Weeb.js responsible for all Image related stuff (Toph)</div>
+            <div class="class-description">Submodule of Weeb.js responsible for all ImageGeneration related stuff (Korra)</div>
         
     
 </header>
@@ -57,7 +57,7 @@
     <h2>Constructor</h2>
     
 
-    <h4 class="name" id="WeebImages"><span class="type-signature"></span>new WeebImages<span class="signature">(key, wolken, options<span class="signature-attributes">opt</span>, customAxios<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="WeebImageGeneration"><span class="type-signature"></span>new WeebImageGeneration<span class="signature">(key, wolken, options<span class="signature-attributes">opt</span>, customAxios<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
 
     
 
@@ -69,7 +69,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_Images_Images.js.html">lib/Images/Images.js</a>, <a href="lib_Images_Images.js.html#line7">line 7</a>
+        <a href="lib_ImageGeneration_ImageGeneration.js.html">lib/ImageGeneration/ImageGeneration.js</a>, <a href="lib_ImageGeneration_ImageGeneration.js.html#line7">line 7</a>
     </li></ul></dd>
     
 
@@ -333,7 +333,7 @@
 
     
 
-    <h4 class="name" id="getRandom"><span class="type-signature"></span>getRandom<span class="signature">(options<span class="signature-attributes">opt</span>, options)</span><span class="type-signature"> &rarr; {Promise.&lt;(<a href="global.html#WeebImageReponse">WeebImageReponse</a>|<a href="WeebError.html">WeebError</a>)>}</span></h4>
+    <h4 class="name" id="generateDiscordMock"><span class="type-signature"></span>generateDiscordMock<span class="signature">(statusIcon<span class="signature-attributes">opt</span>, url)</span><span class="type-signature"> &rarr; {Promise.&lt;(Buffer|<a href="WeebError.html">WeebError</a>)>}</span></h4>
 
     
 
@@ -345,7 +345,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_Images_Images.js.html">lib/Images/Images.js</a>, <a href="lib_Images_Images.js.html#line150">line 150</a>
+        <a href="lib_ImageGeneration_ImageGeneration.js.html">lib/ImageGeneration/ImageGeneration.js</a>, <a href="lib_ImageGeneration_ImageGeneration.js.html#line34">line 34</a>
     </li></ul></dd>
     
 
@@ -385,7 +385,7 @@
 
 
 <div class="description">
-    Retrieve a random image using either a type or tags
+    Generate a Discord Status mock up using a given Image
 </div>
 
 
@@ -398,7 +398,7 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>WeebHandler.images.getRandom({type: 'bite', nsfw: false, filetype: 'gif'}).then(object => { console.log(object)}).catch(err => console.error(`Something went wrong :&lt;, ${err}`))</code></pre>
+    <pre class="prettyprint"><code>// Requires you to have the Simple Image Gen Scope// Status (second argument) can be "online", "dnd", "idle", "offline" or "streaming"WeebHandler.imageGeneration.generateDiscordMock('https://cdn.discordapp.com/avatars/132584525296435200/a_8a64055b16fc9415954203b0f542dbde.gif', 'online').then(buffer => { console.log(buffer)}).catch(err => console.error(`Something went wrong :&lt;, ${err}`))</code></pre>
 
 
 
@@ -432,13 +432,13 @@
 
         <tr>
             
-                <td class="name"><code>options</code></td>
+                <td class="name"><code>statusIcon</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">String</span>
 
 
             
@@ -459,22 +459,27 @@
             
                 <td class="default">
                 
-                    <code>{}</code>
+                    <code>online</code>
                 
                 </td>
             
 
-            <td class="description last">Options for this request</td>
+            <td class="description last">The status to mock, can be online, dnd, offline, streaming and idle</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>options</code></td>
+                <td class="name"><code>url</code></td>
             
 
             <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
             
             </td>
 
@@ -494,9 +499,127 @@
                 </td>
             
 
-            <td class="description last">
-                <h6>Properties</h6>
-                
+            <td class="description last">The Image to perform the Mock on</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    A Buffer containing the image if resolved and a WeebError if rejected
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;(Buffer|<a href="WeebError.html">WeebError</a>)></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="generateImage"><span class="type-signature"></span>generateImage<span class="signature">(type, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;(Buffer|<a href="WeebError.html">WeebError</a>)>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="lib_ImageGeneration_ImageGeneration.js.html">lib/ImageGeneration/ImageGeneration.js</a>, <a href="lib_ImageGeneration_ImageGeneration.js.html#line76">line 76</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Generate a simple image using Weeb.sh. Requires the generate_simple Scope!
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Requires you to have the Simple Image Gen Scope// Type can be won, awooo or eyes (Awooo supports hair and face as options which needs to be a hex code)WeebHandler.imageGeneration.generateImage('won').then(buffer => { console.log(buffer)}).catch(err => console.error(`Something went wrong :&lt;, ${err}`))</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
 
 <table class="params">
     <thead>
@@ -520,84 +643,6 @@
     </thead>
 
     <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>nsfw</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>false</code>
-                
-                </td>
-            
-
-            <td class="description last">Whether to include NSFW images or not, can be true, false or only</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>hidden</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>false</code>
-                
-                </td>
-            
-
-            <td class="description last">Whether to include hidden images or not</td>
-        </tr>
-
     
 
         <tr>
@@ -617,8 +662,6 @@
             
                 <td class="attributes">
                 
-                    &lt;optional><br>
-                
 
                 
 
@@ -629,25 +672,23 @@
             
                 <td class="default">
                 
-                    <code>null</code>
-                
                 </td>
             
 
-            <td class="description last">The type category the image should belong to. You need to provide either this or tags or both</td>
+            <td class="description last">The type of Simple image to generate, can be awooo, eyes and won</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>tags</code></td>
+                <td class="name"><code>options</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Array</span>
+<span class="param-type">Object</span>
 
 
             
@@ -668,19 +709,42 @@
             
                 <td class="default">
                 
-                    <code>[]</code>
+                    <code>{}</code>
                 
                 </td>
             
 
-            <td class="description last">Tags the image should have. You need to provide either this or type or both</td>
-        </tr>
+            <td class="description last">Options for this request (only used when type is awooo)
+                <h6>Properties</h6>
+                
 
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
     
 
         <tr>
             
-                <td class="name"><code>filetype</code></td>
+                <td class="name"><code>face</code></td>
             
 
             <td class="type">
@@ -707,12 +771,51 @@
             
                 <td class="default">
                 
-                    <code>null</code>
+                    <code>fff0d3</code>
                 
                 </td>
             
 
-            <td class="description last">The file type the image returned will have (png, jpg, jpeg, gif), Not setting this means it can be a random one</td>
+            <td class="description last">The hex code to use for the Face color</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>hair</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>cc817c</code>
+                
+                </td>
+            
+
+            <td class="description last">The hex code to use for the hair color</td>
         </tr>
 
     
@@ -743,7 +846,7 @@
 
         
 <div class="param-desc">
-    A WeebImageReponse if resolved and a WeebError if rejected
+    A Buffer containing the image if resolved and a WeebError if rejected
 </div>
 
 
@@ -754,7 +857,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Promise.&lt;(<a href="global.html#WeebImageReponse">WeebImageReponse</a>|<a href="WeebError.html">WeebError</a>)></span>
+<span class="param-type">Promise.&lt;(Buffer|<a href="WeebError.html">WeebError</a>)></span>
 
 
     </dd>
@@ -768,7 +871,7 @@
 
     
 
-    <h4 class="name" id="getTags"><span class="type-signature"></span>getTags<span class="signature">(options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;(<a href="global.html#WeebTagsResponse">WeebTagsResponse</a>|<a href="WeebError.html">WeebError</a>)>}</span></h4>
+    <h4 class="name" id="generateInsult"><span class="type-signature"></span>generateInsult<span class="signature">(URL)</span><span class="type-signature"> &rarr; {Promise.&lt;(Buffer|<a href="WeebError.html">WeebError</a>)>}</span></h4>
 
     
 
@@ -780,7 +883,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_Images_Images.js.html">lib/Images/Images.js</a>, <a href="lib_Images_Images.js.html#line38">line 38</a>
+        <a href="lib_ImageGeneration_ImageGeneration.js.html">lib/ImageGeneration/ImageGeneration.js</a>, <a href="lib_ImageGeneration_ImageGeneration.js.html#line177">line 177</a>
     </li></ul></dd>
     
 
@@ -820,7 +923,7 @@
 
 
 <div class="description">
-    Get a list of all available Tags
+    Generate a Waifu insult using a given Image. Requires the generate_waifu_insult Scope!
 </div>
 
 
@@ -833,7 +936,167 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>WeebHandler.images.getTags().then(array => { console.log(array)}).catch(err => console.error(`Something went wrong :&lt;, ${err}`))</code></pre>
+    <pre class="prettyprint"><code>const url = 'https://cdn.discordapp.com/avatars/132584525296435200/3a0631c5d4df2a5e8795547964bd1027.webp'// Requires you to have the Waifu Image Gen ScopeWeebHandler.imageGeneration.generateInsult(url).then(buffer => { console.log(buffer)}).catch(err => console.error(`Something went wrong :&lt;, ${err}`))</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>URL</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The Image to waifu insult</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    A Buffer containing the image if resolved and a WeebError if rejected
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;(Buffer|<a href="WeebError.html">WeebError</a>)></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="generateLicense"><span class="type-signature"></span>generateLicense<span class="signature">(options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;(Buffer|<a href="WeebError.html">WeebError</a>)>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="lib_ImageGeneration_ImageGeneration.js.html">lib/ImageGeneration/ImageGeneration.js</a>, <a href="lib_ImageGeneration_ImageGeneration.js.html#line128">line 128</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Generate a License using Weeb.sh. Requires the generate_license Scope!
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const options = {   title: 'test',   avatar: 'https://cdn.discordapp.com/avatars/132584525296435200/a_8a64055b16fc9415954203b0f542dbde.gif',   badges: ['https://cdn.discordapp.com/avatars/132584525296435200/a_8a64055b16fc9415954203b0f542dbde.gif'],   widgets: ['Hi', 'bye', 'kek']}// Requires you to have the License ScopeWeebHandler.imageGeneration.generateLicense(options).then(buffer => { console.log(buffer)}).catch(err => console.error(`Something went wrong :&lt;, ${err}`)) </code></pre>
 
 
 
@@ -913,8 +1176,6 @@
         <th>Type</th>
 
         
-        <th>Attributes</th>
-        
 
         
         <th>Default</th>
@@ -929,78 +1190,112 @@
 
         <tr>
             
-                <td class="name"><code>nsfw</code></td>
+                <td class="name"><code>title</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Boolean</span>
+<span class="param-type">String</span>
 
 
             
             </td>
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
 
             
                 <td class="default">
                 
-                    <code>false</code>
-                
                 </td>
             
 
-            <td class="description last">Whether to include NSFW tags or not, can be true, false or only</td>
+            <td class="description last">The title of the license</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>hidden</code></td>
+                <td class="name"><code>icon</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Boolean</span>
+<span class="param-type">String</span>
 
 
             
             </td>
 
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
             
 
             
                 <td class="default">
                 
-                    <code>false</code>
+                </td>
+            
+
+            <td class="description last">The main icon for the License (needs to be a valid URL)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>badges</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    <code>[]}</code>
                 
                 </td>
             
 
-            <td class="description last">Whether to include hidden tags or not</td>
+            <td class="description last">Badges to display below the main Image (all of these need to be valid URLs)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>widgets</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    <code>[]}</code>
+                
+                </td>
+            
+
+            <td class="description last">Widget text to display right of the main icon</td>
         </tr>
 
     
@@ -1025,13 +1320,28 @@
 
 
 
+<h5>Throws:</h5>
+
+        
+
+    <div class="param-desc">
+    
+        
+<span class="param-type"><a href="WeebError.html">WeebError</a></span>
+
+
+    
+    </div>
+
+
+    
 
 
 <h5>Returns:</h5>
 
         
 <div class="param-desc">
-    A WeebTagsResponse if resolved and a WeebError if rejected
+    A Buffer containing the image if resolved and a WeebError if rejected
 </div>
 
 
@@ -1042,7 +1352,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Promise.&lt;(<a href="global.html#WeebTagsResponse">WeebTagsResponse</a>|<a href="WeebError.html">WeebError</a>)></span>
+<span class="param-type">Promise.&lt;(Buffer|<a href="WeebError.html">WeebError</a>)></span>
 
 
     </dd>
@@ -1056,7 +1366,7 @@
 
     
 
-    <h4 class="name" id="getTypes"><span class="type-signature"></span>getTypes<span class="signature">(options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;(<a href="global.html#WeebTypesResponse">WeebTypesResponse</a>|<a href="WeebError.html">WeebError</a>)>}</span></h4>
+    <h4 class="name" id="generateLoveShip"><span class="type-signature"></span>generateLoveShip<span class="signature">(targetOne, targetTwo)</span><span class="type-signature"> &rarr; {Promise.&lt;(Buffer|<a href="WeebError.html">WeebError</a>)>}</span></h4>
 
     
 
@@ -1068,7 +1378,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_Images_Images.js.html">lib/Images/Images.js</a>, <a href="lib_Images_Images.js.html#line91">line 91</a>
+        <a href="lib_ImageGeneration_ImageGeneration.js.html">lib/ImageGeneration/ImageGeneration.js</a>, <a href="lib_ImageGeneration_ImageGeneration.js.html#line214">line 214</a>
     </li></ul></dd>
     
 
@@ -1108,7 +1418,7 @@
 
 
 <div class="description">
-    Get a list of all available Types
+    Generate a Love Ship using 2 Images. Requires the generate_love_ship Scope!
 </div>
 
 
@@ -1121,7 +1431,7 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>WeebHandler.images.getTypes().then(array => { console.log(array)}).catch(err => console.error(`Something went wrong :&lt;, ${err}`))</code></pre>
+    <pre class="prettyprint"><code>const targetOne = 'https://cdn.discordapp.com/avatars/185476724627210241/615ee9f0e97aab7fa0725165531df3a7.webp?size=256'const targetTwo = 'https://cdn.discordapp.com/avatars/388799526103941121/b5acd5dd89aa8ff7c3600f2b7edaff57.webp?size=256'// Requires you to have the Waifu Image Gen ScopeWeebHandler.imageGeneration.generateLoveShip(targetOne, targetTwo).then(buffer => { console.log(buffer) }).catch(err => console.error(`Something went wrong :&lt;, ${err}`))</code></pre>
 
 
 
@@ -1139,11 +1449,7 @@
         <th>Type</th>
 
         
-        <th>Attributes</th>
-        
 
-        
-        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -1155,186 +1461,46 @@
 
         <tr>
             
-                <td class="name"><code>options</code></td>
+                <td class="name"><code>targetOne</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">String</span>
 
 
             
             </td>
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
 
             
-                <td class="default">
-                
-                    <code>{}</code>
-                
-                </td>
-            
 
-            <td class="description last">Options for this request
-                <h6>Properties</h6>
-                
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>nsfw</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>false</code>
-                
-                </td>
-            
-
-            <td class="description last">Whether to include NSFW types or not, can be true, false or only</td>
+            <td class="description last">URL pointing to the first Image</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>hidden</code></td>
+                <td class="name"><code>targetTwo</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Boolean</span>
+<span class="param-type">String</span>
 
 
             
             </td>
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
 
             
-                <td class="default">
-                
-                    <code>false</code>
-                
-                </td>
-            
 
-            <td class="description last">Whether to include hidden types or not</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>preview</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>false</code>
-                
-                </td>
-            
-
-            <td class="description last">Whether to include a preview for each type or not</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
+            <td class="description last">URL pointing to the second Image</td>
         </tr>
 
     
@@ -1358,7 +1524,7 @@
 
         
 <div class="param-desc">
-    A WeebTypesResponse if resolved and a WeebError if rejected
+    A Buffer containing the image if resolved and a WeebError if rejected
 </div>
 
 
@@ -1369,7 +1535,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Promise.&lt;(<a href="global.html#WeebTypesResponse">WeebTypesResponse</a>|<a href="WeebError.html">WeebError</a>)></span>
+<span class="param-type">Promise.&lt;(Buffer|<a href="WeebError.html">WeebError</a>)></span>
 
 
     </dd>

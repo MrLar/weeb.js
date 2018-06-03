@@ -1,11 +1,11 @@
 const WeebJS = require('../../index')
 
-const WeebHandler = new WeebJS('super secret token', 'Weeb.js Example/v2.0.0')
+const WeebHandler = new WeebJS('super secret token', true, 'Weeb.js Example/v2.0.0')
                                                      // User Agent (Optional)
 
 // Requires you to have the Simple Image Gen Scope
 // Status (first argument) can be "online", "dnd", "idle", "offline" or "streaming"
 
-WeebHandler.images.generateDiscordMock('https://cdn.discordapp.com/avatars/132584525296435200/a_8a64055b16fc9415954203b0f542dbde.gif', 'online').then(buffer => {
+WeebHandler.imageGeneration.generateDiscordMock('https://cdn.discordapp.com/avatars/132584525296435200/a_8a64055b16fc9415954203b0f542dbde.gif', 'online').then(buffer => {
   console.log(buffer)
 }).catch(err => console.error(`Something went wrong :<, ${err}`))

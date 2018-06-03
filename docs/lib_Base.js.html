@@ -22,7 +22,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Base.html">Base</a><ul class='methods'><li data-type='method'><a href="Base.html#requestAPI">requestAPI</a></li></ul></li><li><a href="WeebImages.html">WeebImages</a><ul class='methods'><li data-type='method'><a href="WeebImages.html#generateDiscordMock">generateDiscordMock</a></li><li data-type='method'><a href="WeebImages.html#generateImage">generateImage</a></li><li data-type='method'><a href="WeebImages.html#generateInsult">generateInsult</a></li><li data-type='method'><a href="WeebImages.html#generateLicense">generateLicense</a></li><li data-type='method'><a href="WeebImages.html#generateLoveShip">generateLoveShip</a></li><li data-type='method'><a href="WeebImages.html#getRandom">getRandom</a></li><li data-type='method'><a href="WeebImages.html#getTags">getTags</a></li><li data-type='method'><a href="WeebImages.html#getTypes">getTypes</a></li></ul></li><li><a href="WeebJS.html">WeebJS</a></li><li><a href="WeebJSError.html">WeebJSError</a></li></ul><h3>Global</h3><ul><li><a href="global.html#BASE_URL">BASE_URL</a></li><li><a href="global.html#DISCORD_STATUSES">DISCORD_STATUSES</a></li><li><a href="global.html#ENDPOINTS">ENDPOINTS</a></li><li><a href="global.html#FILE_TYPES">FILE_TYPES</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="WeebError.html">WeebError</a></li><li><a href="WeebImageGeneration.html">WeebImageGeneration</a><ul class='methods'><li data-type='method'><a href="WeebImageGeneration.html#generateDiscordMock">generateDiscordMock</a></li><li data-type='method'><a href="WeebImageGeneration.html#generateImage">generateImage</a></li><li data-type='method'><a href="WeebImageGeneration.html#generateInsult">generateInsult</a></li><li data-type='method'><a href="WeebImageGeneration.html#generateLicense">generateLicense</a></li><li data-type='method'><a href="WeebImageGeneration.html#generateLoveShip">generateLoveShip</a></li></ul></li><li><a href="WeebImages.html">WeebImages</a><ul class='methods'><li data-type='method'><a href="WeebImages.html#getRandom">getRandom</a></li><li data-type='method'><a href="WeebImages.html#getTags">getTags</a></li><li data-type='method'><a href="WeebImages.html#getTypes">getTypes</a></li></ul></li><li><a href="WeebJS.html">WeebJS</a></li></ul><h3>Global</h3><ul><li><a href="global.html#BASE_URL">BASE_URL</a></li><li><a href="global.html#DISCORD_STATUSES">DISCORD_STATUSES</a></li><li><a href="global.html#ENDPOINTS">ENDPOINTS</a></li><li><a href="global.html#FILE_TYPES">FILE_TYPES</a></li></ul>
 </nav>
 
 <div id="main">
@@ -39,47 +39,69 @@
         <article>
             <pre class="prettyprint source linenums"><code>const Error = require('./Error')
 const constants = require('./constants')
-/**
- * Main Handler for Weeb.sh
- */
+const RequestHandler = require('./RequestHandler')
+const axios = require('axios')
+const {version} = require('../package')
+
 class Base {
-  /**
-   * @class Base - Main handler for all Weeb.sh request
-   */
-  constructor () {
+  constructor (key, wolken, options = {}, customAxios) {
+
+    this.requestHandler = new RequestHandler(options)
     /**
      * Error constructor
-     * @type {WeebJSError}
+     * @type {WeebError}
      */
     this.Error = Error
+
+    if (typeof key !== 'string') throw new this.Error('Authorization Key is not a string.')
+    if (options.userAgent &amp;&amp; typeof options.userAgent !== 'string') throw new this.Error('options.userAgent is not a string.')
+    /**
+     * User Agent that is being attached to all requests
+     * @type {string}
+     */
+    this.agent = options.userAgent || 'Weeb.js/' + version
+    /**
+     * Authorization Key used for all requests
+     * @type {string}
+     */
+    this.key = `${wolken ? 'Wolke ' : 'Bearer '} ${key}`
+
+    if (customAxios) {
+      if (!customAxios.request) throw new this.Error('customAxios needs to be a valid instance of Axios')
+      customAxios.defaults.headers.common['Authorization'] = key
+      customAxios.defaults.headers.common['User-Agent'] = options.userAgent || 'Weeb.js/' + version
+    }
+    /**
+     * Axios Client to make all request to Weeb.js
+     * @type {axios}
+     */
+    this.axios = customAxios || axios.create(Object.assign({
+      baseURL: constants.BASE_URL,
+      headers: {'Authorization': this.key, 'User-Agent': this.agent}
+    }, options &amp;&amp; options.axios ? options.axios : {}))
   }
 
   /**
    * Send a request to Weeb.sh
    * @param {String} endpoint - The endpoint to make the request to
-   * @param {Object} query - Query string params or Post options if method is post
-   * @param {Boolean} [isPost=false] - Whether this is a post or a get
+   * @param {Boolean} method - The HTTP method for this request
+   * @param {Object} options - Request options
+   * @param {Object} options.data - Post data for put, post and patch methods
+   * @param {Object} options.params - Query string params for the request
    * @return {Promise&lt;Buffer|Object>}
    */
-  requestAPI (endpoint, query = {}, isPost = false) {
-    return new Promise(async (resolve, reject) => {
-      try {
-        let res
-        if (isPost) {
-          res = await this.axios.post(constants.ENDPOINTS[endpoint], query, {
-            headers: {'Content-Type': 'application/json'},
-            responseType: 'arraybuffer'
-          })
-        } else {
-          res = await this.axios.get(constants.ENDPOINTS[endpoint], {params: query, responseType: ['discord_status', 'generate'].includes(endpoint) ? 'arraybuffer' : null})
-        }
-        let {data, status} = res
-        if (status &lt; 200 || status > 300) reject(Buffer.isBuffer(data) ? data.toString() : data)
-        else resolve(data)
-      } catch (err) {
-        reject(err)
+  formatAPIRequest (endpoint, method, options = {}) {
+
+    return async () => {
+      const reqOptions = {
+        data: ['post', 'put', 'patch'].includes(method) ? options.data : null,
+        params: options.params
       }
-    })
+      if (options.axios) {
+        Object.assign(reqOptions, options.axios)
+      }
+      return this.axios[method](constants.ENDPOINTS[endpoint], ['post', 'put', 'patch'].includes(method) ? null : reqOptions, ['post', 'put', 'patch'].includes(method) ? reqOptions : null)
+    }
   }
 }
 
@@ -96,7 +118,7 @@ module.exports = Base
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Jun 02 2018 16:33:17 GMT+0200 (W. Europe Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Jun 03 2018 12:12:58 GMT+0200 (W. Europe Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

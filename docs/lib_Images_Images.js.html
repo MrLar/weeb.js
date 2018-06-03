@@ -22,7 +22,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Base.html">Base</a><ul class='methods'><li data-type='method'><a href="Base.html#requestAPI">requestAPI</a></li></ul></li><li><a href="WeebImages.html">WeebImages</a><ul class='methods'><li data-type='method'><a href="WeebImages.html#generateDiscordMock">generateDiscordMock</a></li><li data-type='method'><a href="WeebImages.html#generateImage">generateImage</a></li><li data-type='method'><a href="WeebImages.html#generateInsult">generateInsult</a></li><li data-type='method'><a href="WeebImages.html#generateLicense">generateLicense</a></li><li data-type='method'><a href="WeebImages.html#generateLoveShip">generateLoveShip</a></li><li data-type='method'><a href="WeebImages.html#getRandom">getRandom</a></li><li data-type='method'><a href="WeebImages.html#getTags">getTags</a></li><li data-type='method'><a href="WeebImages.html#getTypes">getTypes</a></li></ul></li><li><a href="WeebJS.html">WeebJS</a></li><li><a href="WeebJSError.html">WeebJSError</a></li></ul><h3>Global</h3><ul><li><a href="global.html#BASE_URL">BASE_URL</a></li><li><a href="global.html#DISCORD_STATUSES">DISCORD_STATUSES</a></li><li><a href="global.html#ENDPOINTS">ENDPOINTS</a></li><li><a href="global.html#FILE_TYPES">FILE_TYPES</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="WeebError.html">WeebError</a></li><li><a href="WeebImageGeneration.html">WeebImageGeneration</a><ul class='methods'><li data-type='method'><a href="WeebImageGeneration.html#generateDiscordMock">generateDiscordMock</a></li><li data-type='method'><a href="WeebImageGeneration.html#generateImage">generateImage</a></li><li data-type='method'><a href="WeebImageGeneration.html#generateInsult">generateInsult</a></li><li data-type='method'><a href="WeebImageGeneration.html#generateLicense">generateLicense</a></li><li data-type='method'><a href="WeebImageGeneration.html#generateLoveShip">generateLoveShip</a></li></ul></li><li><a href="WeebImages.html">WeebImages</a><ul class='methods'><li data-type='method'><a href="WeebImages.html#getRandom">getRandom</a></li><li data-type='method'><a href="WeebImages.html#getTags">getTags</a></li><li data-type='method'><a href="WeebImages.html#getTypes">getTypes</a></li></ul></li><li><a href="WeebJS.html">WeebJS</a></li></ul><h3>Global</h3><ul><li><a href="global.html#BASE_URL">BASE_URL</a></li><li><a href="global.html#DISCORD_STATUSES">DISCORD_STATUSES</a></li><li><a href="global.html#ENDPOINTS">ENDPOINTS</a></li><li><a href="global.html#FILE_TYPES">FILE_TYPES</a></li></ul>
 </nav>
 
 <div id="main">
@@ -39,44 +39,23 @@
         <article>
             <pre class="prettyprint source linenums"><code>const Base = require('../Base')
 const constants = require('../constants')
-const axios = require('axios')
-const {version} = require('../../package')
+
 /**
- * Submodule of Weeb.js responsible for all Image related stuff (Korra &amp; Toph)
+ * Submodule of Weeb.js responsible for all Image related stuff (Toph)
  */
 class WeebImages extends Base {
   /**
    * @class WeebImages - Submodule of Weeb.js responsible for all Image related stuff (Korra &amp; Toph)
    * @param {String} key - The token to use for Requesting all data prefixed with the Token type.
-   * @param {String} [agent=Weeb.js/{version}] - The User Agent to attach to all requests (Formatted as NAME/VERSION or NAME/VERSION/ENV)
-   * @param {Axios} [baseAxios=null] - The Axios instance of the main module if not used separately
+   * @param {Boolean} wolken - Whenever or not the token is a wolke token (please note almost all new tokens are wolke tokens)
+   * @param {WeebJSOptions} [options=null] - Options for all requests
+   * @param {Axios} [customAxios=null] - The axios instance of the main module if not used separately or a custom axios instance
    */
-  constructor (key, agent = 'Weeb.js/' + version, baseAxios = null) {
-    super()
-    if (typeof key !== 'string') throw new this.Error('Authorization Key is not a string.')
-    let type = 'Wolke'
-    if (key.startsWith('Bearer')) type = 'Bearer'
-    const toSlice = key.startsWith('Bearer') || key.startsWith('Wolke') ? type.length : 0
-    if (typeof agent !== 'string') throw new this.Error('User-Agent is not a string.')
-    /**
-     * User Agent that is being attached to all requests
-     * @type {string}
-     */
-    this.agent = agent
-    /**
-     * Authorization Key used for all requests
-     * @type {string}
-     */
-    this.key = type + ' ' + key.slice(toSlice).trim()
-
-    /**
-     * Axios Client to make all request to Weeb.js
-     * @type {axios}
-     */
-    this.axios = baseAxios || axios.create({
-      baseURL: constants.BASE_URL,
-      headers: {'Authorization': this.key, 'User-Agent': this.agent}
-    })
+  constructor (key, wolken, options = {}, customAxios = null) {
+    if (options.images || options.toph) {
+      options = Object.assign({...options}, options.toph || options.images || {})
+    }
+    super(key, wolken, options, customAxios)
   }
 
   /**
@@ -89,8 +68,11 @@ class WeebImages extends Base {
    * @param {Object} [options={}] - Options for this request
    * @param {Boolean} [options.nsfw=false] - Whether to include NSFW tags or not, can be true, false or only
    * @param {Boolean} [options.hidden=false] - Whether to include hidden tags or not
-   * @return {Promise&lt;WeebTagsResponse>}
-   * @throws {WeebJSError}
+   * @return {Promise&lt;WeebTagsResponse|WeebError>} A WeebTagsResponse if resolved and a WeebError if rejected
+   * @example
+   * WeebHandler.images.getTags().then(array => {
+   *  console.log(array)
+   * }).catch(err => console.error(`Something went wrong :&lt;, ${err}`))
    */
   getTags (options = {}) {
     // Capture the stacktrace before it gets destroyed by the async operation
@@ -102,7 +84,19 @@ class WeebImages extends Base {
       if (options.nsfw &amp;&amp; typeof options.nsfw !== 'boolean' &amp;&amp; options.nsfw !== 'only') return reject(new this.Error('NSFW must either be true, false or only', _stackTrace))
       const query = {nsfw: options.nsfw || false, hidden: options.hidden || false}
 
-      return this.requestAPI('tags', query).catch(err => reject(new this.Error(err, _stackTrace))).then(resolve)
+      const reqOptions = {
+        params: query,
+      }
+
+      this.requestHandler.addToQueue(this.formatAPIRequest('tags', 'get', reqOptions))
+        .then(res => {
+          if (res.request.res.statusCode !== 200) {
+            reject(new this.Error(res, _stackTrace))
+          } else {
+            resolve(res.data)
+          }
+        })
+        .catch(err => reject(new this.Error(err, _stackTrace)))
     })
   }
 
@@ -110,7 +104,7 @@ class WeebImages extends Base {
    * @typedef {Object} WeebTypesResponse
    * @property {Number} status - The returned status code for the request made
    * @property {string[]} types - Array of all available types
-   * @property {WeebImagePreview[]} [preview] - A preview object for every type
+   * @property {WeebImagePreview[]} preview - A preview object for every type, empty if no previews requested
    */
 
   /**
@@ -127,8 +121,11 @@ class WeebImages extends Base {
    * @param {Boolean} [options.nsfw=false] - Whether to include NSFW types or not, can be true, false or only
    * @param {Boolean} [options.hidden=false] - Whether to include hidden types or not
    * @param {Boolean} [options.preview=false] - Whether to include a preview for each type or not
-   * @return {Promise&lt;WeebTypesResponse>}
-   * @throws {WeebJSError}
+   * @return {Promise&lt;WeebTypesResponse|WeebError>} A WeebTypesResponse if resolved and a WeebError if rejected
+   * @example
+   * WeebHandler.images.getTypes().then(array => {
+   *  console.log(array)
+   * }).catch(err => console.error(`Something went wrong :&lt;, ${err}`))
    */
   getTypes (options = {}) {
     // Capture the stacktrace before it gets destroyed by the async operation
@@ -143,7 +140,20 @@ class WeebImages extends Base {
       const query = {nsfw: options.nsfw || false, hidden: options.hidden || false}
       // Preview just needs to be present to work even setting it to false would return previews
       if (options.preview) query['preview'] = true
-      return this.requestAPI('types', query).catch(err => reject(new this.Error(err, _stackTrace))).then(resolve)
+
+      const reqOptions = {
+        params: query,
+      }
+
+      this.requestHandler.addToQueue(this.formatAPIRequest('types', 'get', reqOptions))
+        .then(res => {
+          if (res.request.res.statusCode !== 200) {
+            reject(new this.Error(res, _stackTrace))
+          } else {
+            resolve(res.data)
+          }
+        })
+        .catch(err => reject(new this.Error(err, _stackTrace)))
     })
   }
 
@@ -167,11 +177,14 @@ class WeebImages extends Base {
    * @param options
    * @param {Boolean} [options.nsfw=false] - Whether to include NSFW images or not, can be true, false or only
    * @param {Boolean} [options.hidden=false] - Whether to include hidden images or not
-   * @param {String} [options.type=null] - The type category the image should belong to
-   * @param {Array} [options.tags=[]] - Tags the image should have
-   * @param {String} [options.filetype=null] - The file type the image returned can have (png, jpg, jpeg, gif), null means all.
-   * @return {Promise&lt;WeebImageReponse>}
-   * @throws {WeebJSError}
+   * @param {String} [options.type=null] - The type category the image should belong to. You need to provide either this or tags or both
+   * @param {Array} [options.tags=[]] - Tags the image should have. You need to provide either this or type or both
+   * @param {String} [options.filetype=null] - The file type the image returned will have (png, jpg, jpeg, gif), Not setting this means it can be a random one
+   * @return {Promise&lt;WeebImageReponse|WeebError>} A WeebImageReponse if resolved and a WeebError if rejected
+   * @example
+   * WeebHandler.images.getRandom({type: 'bite', nsfw: false, filetype: 'gif'}).then(object => {
+   *  console.log(object)
+   * }).catch(err => console.error(`Something went wrong :&lt;, ${err}`))
    */
   getRandom (options = {}) {
     // Capture the stacktrace before it gets destroyed by the async operation
@@ -193,131 +206,21 @@ class WeebImages extends Base {
         tags: options.tags || null,
         type: options.type || null
       }
-      this.requestAPI('random', query).catch(err => reject(new this.Error(err, _stackTrace))).then(resolve)
-    })
-  }
 
-  /**
-   * Generate a Discord Status mock up using a given Image
-   * @param {String} [statusIcon=online] - The status to mock, can be online, dnd, offline, streaming and idle
-   * @param {String} url - The Image to perform the Mock on
-   * @return {Promise&lt;Buffer>}
-   * @throws {WeebJSError}
-   */
-  generateDiscordMock (url, statusIcon = null) {
-    // Capture the stacktrace before it gets destroyed by the async operation
-    let _stackTrace = {}
-    Error.captureStackTrace(_stackTrace)
-
-    return new Promise((resolve, reject) => {
-      if (statusIcon &amp;&amp; !constants.DISCORD_STATUSES.includes(statusIcon.toLowerCase())) return reject(new this.Error('Status can only be online, dnd, idle, offline or streaming.'), _stackTrace)
-      if (!url.match(/^https?:\/\/.+\.(?:jpg|png|jpeg|gif|webp)$/g)) return reject(new this.Error('You need to prove a valid direct image URL.'), _stackTrace)
-
-      const query = {status: statusIcon || 'online', avatar: url || ''}
-      return this.requestAPI('discord_status', query).catch(err => reject(new this.Error(err, _stackTrace))).then(resolve)
-    })
-  }
-
-  /**
-   * Generate a simple image using Weeb.sh. Requires the generate_simple Scope!
-   * @param {String} type - The type of Simple image to generate, can be awooo, eyes and won
-   * @param {Object} [options={}] - Options for this request (only used when type is awooo)
-   * @param {String} [options.face=fff0d3] - The hex code to use for the Face color
-   * @param {String} [options.hair=cc817c] - The hex code to use for the hair color
-   * @return {Promise&lt;Buffer>}
-   * @throws {WeebJSError}
-   */
-  generateImage (type, options = {}) {
-    // Capture the stacktrace before it gets destroyed by the async operation
-    let _stackTrace = {}
-    Error.captureStackTrace(_stackTrace)
-
-    return new Promise((resolve, reject) => {
-      if (typeof type !== 'string' || (type !== 'awooo' &amp;&amp; type !== 'eyes' &amp;&amp; type !== 'won')) return reject(new this.Error('Type must be a string and either awooo, eyes or won', _stackTrace))
-
-      if (type === 'awoo' &amp;&amp; (options.hair || options.face)) {
-        if (options.hair &amp;&amp; !options.hair.match(/^[0-9a-f]{6}$/gi)) return reject(new this.Error('Hair must be a valid hex code', _stackTrace))
-        if (options.face &amp;&amp; !options.face.match(/^[0-9a-f]{6}$/gi)) return reject(new this.Error('Face must be a valid hex code', _stackTrace))
-      }
-      const query = {type, face: options.face || 'fff0d3', hair: options.hair || 'cc817c'}
-      return this.requestAPI('generate', query).catch(err => reject(new this.Error(err, _stackTrace))).then(resolve)
-    })
-  }
-
-  /**
-   * Generate a License using Weeb.sh. Requires the generate_license Scope!
-   *  @param {Object} [options={}] - Options for this request
-   *  @param {String} options.title - The title of the license
-   *  @param {String} options.icon - The main icon for the License (needs to be a valid URL)
-   *  @param {Array} [options.badges=[]} - Badges to display below the main Image (all of these need to be valid URLs)
-   *  @param {Array} [options.widgets=[]} - Widget text to display right of the main icon
-   *  @return {Promise&lt;Buffer>}
-   *  @throws {WeebJSError}
-   */
-  generateLicense (options = {}) {
-    // Capture the stacktrace before it gets destroyed by the async operation
-    let _stackTrace = {}
-    Error.captureStackTrace(_stackTrace)
-
-    return new Promise((resolve, reject) => {
-      if (typeof options.avatar !== 'string' || typeof options.title !== 'string') {
-        return reject(new this.Error('Both Title and Icon need to be given and must be a string.', _stackTrace))
-      }
-      if (options.badges &amp;&amp; (!(options.badges instanceof Array) || options.badges.length > 3 || options.badges.length &lt; 1)) {
-        return reject(new this.Error('Badges must be an array that contains at least 1 and not more than 3 values', _stackTrace))
-      }
-      if (options.widgets &amp;&amp; (!(options.widgets instanceof Array) || options.widgets.length > 3 || options.widgets.length &lt; 1)) {
-        return reject(new this.Error('Widgets must be an array that contains at least 1 and not more than 3 values', _stackTrace))
+      const reqOptions = {
+        params: query,
       }
 
-      return this.requestAPI('license', {
-        title: options.title,
-        avatar: options.avatar,
-        widgets: options.widgets || [],
-        badges: options.badges || []
-      }).catch(err => reject(new this.Error(err, _stackTrace))).then(resolve)
-    })
-  }
-
-  /**
-   * Generate a Waifu insult using a given Image. Requires the generate_waifu_insult Scope!
-   * @param {string} URL - The Image to waifu insult
-   * @return {Promise&lt;Buffer>}
-   * @throws {WeebJSError}
-   */
-  generateInsult (URL) {
-    // Capture the stacktrace before it gets destroyed by the async operation
-    let _stackTrace = {}
-    Error.captureStackTrace(_stackTrace)
-
-    return new Promise((resolve, reject) => {
-      if (typeof URL !== 'string') return reject(new this.Error('The URL must be a string', _stackTrace))
-
-      return this.requestAPI('waifu_insult', {avatar: URL}, true).catch(err => reject(new this.Error(err, _stackTrace))).then(resolve)
-    })
-  }
-
-  /**
-   * Generate a Love Ship using 2 Images. Requires the generate_love_ship Scope!
-   * @param {String} targetOne - URL pointing to the first Image
-   * @param {String} targetTwo - URL pointing to the second Image
-   * @return {Promise&lt;Buffer>}
-   * @throws {WeebJSError}
-   */
-  generateLoveShip (targetOne, targetTwo) {
-    // Capture the stacktrace before it gets destroyed by the async operation
-    let _stackTrace = {}
-    Error.captureStackTrace(_stackTrace)
-
-    return new Promise((resolve, reject) => {
-      if (typeof targetOne !== 'string' || typeof targetTwo !== 'string') {
-        return reject(new this.Error('Both targetOne and targetTwo need to be given and need to be a string', _stackTrace))
-      }
-
-      return this.requestAPI('love_ship', {
-        targetOne,
-        targetTwo
-      }, true).catch(err => reject(new this.Error(err, _stackTrace))).then(resolve)
+      this.requestHandler.addToQueue(this.formatAPIRequest('random', 'get', reqOptions))
+        .then(res => {
+          console.log(res)
+          if (res.request.res.statusCode !== 200) {
+            reject(new this.Error(res, _stackTrace))
+          } else {
+            resolve(res.data)
+          }
+        })
+        .catch(err => reject(new this.Error(err, _stackTrace)))
     })
   }
 }
@@ -335,7 +238,7 @@ module.exports = WeebImages
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Jun 02 2018 16:33:17 GMT+0200 (W. Europe Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Jun 03 2018 12:12:58 GMT+0200 (W. Europe Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
